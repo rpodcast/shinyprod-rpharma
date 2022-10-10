@@ -19,7 +19,7 @@ services:
     command: sleep infinity
     env_file: .env
 
-  rstudiodevcontainer:
+  shinyprodrpharma:
     build:
       context: ./rstudio_docker
       args:
