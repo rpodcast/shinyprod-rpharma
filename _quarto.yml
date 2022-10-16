@@ -1,0 +1,32 @@
+project:
+  type: website
+
+execute: 
+  freeze: auto
+
+website:
+  title: "Building Production-Quality Shiny Applications"
+  description: "Course site for the R/Pharma 2022 Workshop"
+  page-navigation: true
+
+  sidebar: 
+    style: "docked"
+    pinned: true
+    search: true
+    tools:
+      - icon: github
+        href: https://github.com/rpodcast/shinyprod-rpharma
+        text: GitHub
+    contents:
+     - href: index.qmd
+       text: Home
+     - href: license.qmd
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+
+
