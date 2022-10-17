@@ -1,0 +1,44 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "",
+    "text": "🗓️ November 3, 2022 | 9:00am - 12:00pm EDT\n🏨 Virtual\n💥 FREE with conference registration\n📝 To register for the workshop, visit https://rinpharma.com/workshop/2022conference/."
+  },
+  {
+    "objectID": "index.html#learning-objectives",
+    "href": "index.html#learning-objectives",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Learning objectives",
+    "text": "Learning objectives\nTODO: Add general description of course modules"
+  },
+  {
+    "objectID": "index.html#is-this-course-for-me",
+    "href": "index.html#is-this-course-for-me",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Is this course for me?",
+    "text": "Is this course for me?\nTODO: Copy most text from existing Shiny prod site"
+  },
+  {
+    "objectID": "index.html#prework",
+    "href": "index.html#prework",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Prework",
+    "text": "Prework\nTODO: Copy over setup instructions from existing Shiny prod site"
+  },
+  {
+    "objectID": "license.html",
+    "href": "license.html",
+    "title": "License",
+    "section": "",
+    "text": "This work is licensed under a Creative Commons Attribution 4.0 International License."
+  },
+  {
+    "objectID": "CODE_OF_CONDUCT.html",
+    "href": "CODE_OF_CONDUCT.html",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "",
+    "text": "As contributors and maintainers of this project, we pledge to respect all people who contribute through reporting issues, posting feature requests, updating documentation, submitting pull requests or patches, and other activities.\nWe are committed to making participation in this project a harassment-free experience for everyone, regardless of level of experience, gender, gender identity and expression, sexual orientation, disability, personal appearance, body size, race, ethnicity, age, or religion.\nExamples of unacceptable behavior by participants include the use of sexual language or imagery, derogatory comments or personal attacks, trolling, public or private harassment, insults, or other unprofessional conduct.\nProject maintainers have the right and responsibility to remove, edit, or reject comments, commits, code, wiki edits, issues, and other contributions that are not aligned to this Code of Conduct. Project maintainers who do not follow the Code of Conduct may be removed from the project team.\nInstances of abusive, harassing, or otherwise unacceptable behavior may be reported by opening an issue or contacting one or more of the project maintainers.\nThis Code of Conduct is adapted from the Contributor Covenant (http://contributor-covenant.org), version 1.0.0, available at http://contributor-covenant.org/version/1/0/0/"
+  }
+]
