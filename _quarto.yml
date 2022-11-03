@@ -21,6 +21,8 @@ website:
     contents:
      - href: index.qmd
        text: Home
+     - href: slidespage.qmd
+       text: Slides
      - href: license.qmd
 
 format:

@@ -1,0 +1,476 @@
+# Development Best Practices
+
+## All About Perspective
+
+![](https://d33wubrfki0l68.cloudfront.net/571b056757d68e6df81a3e3853f54d3c76ad6efc/32d37/diagrams/data-science.png)
+
+R is the standard-bearer for data analysis tooling
+
+## Shiny App Development
+
+Not just providing another interface for data analysis
+
+. . .
+
+You are engineering an **entire workflow**
+
+## This Could Happen to You
+
+::: {.r-stack}
+![](assets/img/messydesk.svg){.fragment width="550" height="400}
+
+![](assets/img/works_my_machine.jpg){.fragment width="500" height="570"}
+
+![](assets/img/conflicts.jpg){.fragment width="600" height="400"}
+:::
+
+## Thinking of You
+
+These principles can guide (future) you on the right path:
+
+* Deliberate control of app dependencies
+* Managing code complexity with native R frameworks
+* Creating **modules** for streamlined organization and re-usability
+
+Others not covered today
+
+* Rapid prototyping in design process
+* Defending against regressions with testing
+* Version control for collaboration and peace of mind
+
+# Application Dependencies
+
+## It's Never Just Shiny
+
+... at least for production-quality apps!
+
+* External data sources
+* Connections to other execution backends
+* Additional R packages!
+
+## Turned Upside-Down
+
+Imagine your application is working great!
+
+<br>
+
+. . . 
+
+:::: {.columns .v-center-container}
+
+::: {.column width="50%"}
+
+```r
+update.packages(ask = FALSE)
+remotes::install_github("pkg")
+```
+
+:::
+
+::: {.column width="50%}
+
+![](https://rfortherestofus.com/wp-content/uploads/2020/09/update-packages-prompt.png)
+
+:::
+
+::::
+
+## Turned Upside-Down
+
+:::: {.columns .v-center-container}
+
+::: {.column width="50%"}
+
+`ggplot2` version `0.9.3`
+
+![](assets/img/computer_user_happy.png){width="60%"}
+
+:::
+
+::: {.column width="50%"}
+
+`ggplot2` version `1.0.0`
+
+![](http://i.giphy.com/RhEvCHIeZAZ6E.gif)
+
+:::
+
+::::
+
+## Take Control with [`{renv}`](https://rstudio.github.io/renv/)
+
+> Create **r**eproducible **env**ironments for your R projects.
+
+* Next generation of `{packrat}`
+* Isolated package library from rest of your system
+* Transfer projects to different collaborators / platforms
+* **Reproducible** package installation 
+* Easily create new projects or convert existing projects with RStudio or built-in functions.
+
+## Under the Hood
+
+Upon initializing a project:
+
+1. Project-level `.Rprofile` to activate custom package library on startup
+1. Lockfile `renv.lock` to describe state of project library
+1. `renv/library` to hold private project library
+1. `renv/activate.R` performs activation
+
+# Application Structure
+
+## Enter the [`{golem}`](https://thinkr-open.github.io/golem/)
+
+> Opinionated framework for building production-grade Shiny applications as **R packages**
+
+* Scripts guide you with first steps akin to `{usethis}` & `{devtools}`
+* Encourages Shiny best practices (especially **modules**)
+* Streamlines deployment on multiple platforms
+
+## What are Modules?
+
+. . .
+
+### Building blocks to compose any Shiny app out of smaller, more understandable pieces
+
+* Avoids namespace collisions when using same widget across different areas of your app
+* Allow you to encapsulate distinct app interfaces
+* Organize code into logical and easy-to-understand components
+* Facilitate collaboration
+
+## Sound familiar?
+
+* R functions also help avoid collisions in variable names with general R code
+* Essential for creating non-trivial and extensive workflows
+
+## Anatomy of a Function (UI) {auto-animate=true}
+
+:::: {.columns}
+
+::: {.column width="60%"}
+```r
+artUI <- function() {
+  tagList(
+    checkboxInput(
+      "input1",
+      "Check Here"
+    ),
+    selectInput(
+      "input2",
+      "Select Object",
+      choices = c("jar", "vase"),
+      selected = "jar",
+      multiple = FALSE
+    ),
+    plotOutput("plot1")
+  )
+}
+```
+:::
+
+::: {.column width="40%"}
+
+:::
+
+::::
+
+## Anatomy of a Module (UI) {auto-animate=true}
+
+:::: {.columns}
+
+::: {.column width="60%"}
+
+```r
+artUI <- function(id) {
+  ns <- NS(id)
+  tagList(
+    checkboxInput(
+      ns("input1"),
+      "Check Here"
+    ),
+    selectInput(
+      ns("input2"),
+      "Select Object",
+      choices = c("jar", "vase"),
+      selected = "jar",
+      multiple = FALSE
+    ),
+    plotOutput(ns("plot1"))
+  )
+}
+```
+:::
+
+::: {.column width="40%"}
+
+:::
+
+::::
+
+## Anatomy of a Module (UI)
+
+:::: {.columns}
+
+::: {.column width="60%"}
+
+
+```{.r code-line-numbers="1,2,5,9"}
+artUI <- function(id) {
+  ns <- NS(id)
+  tagList(
+    checkboxInput(
+      ns("input1"),
+      "Check Here"
+    ),
+    selectInput(
+      ns("input2"),
+      "Select Object",
+      choices = c("jar", "vase"),
+      selected = "jar",
+      multiple = FALSE
+    )
+  )
+}
+```
+
+:::
+
+::: {.column width="40%"}
+
+* `id`: String to use for namespace
+* `ns <- NS(id)`: Create proper namespace function
+
+:::
+
+::::
+
+## Anatomy of a Module (Server) {auto-animate=true}
+
+:::: {.columns}
+
+::: {.column width="75%"}
+
+```r
+artServer <- function(input, output, session) {
+  df <- reactive({
+    # do something fancy
+  })
+  
+  output$plot1 <- renderPlot({
+    ggplot(df(), aes(x = x, y = y)) +
+      geom_point()
+  })
+}
+```
+
+:::
+
+::: {.column width="25%"}
+
+:::
+
+::::
+
+## Anatomy of a Module (Server) {auto-animate=true}
+
+:::: {.columns}
+
+::: {.column width="75%"}
+
+```r
+artServer <- function(id) {
+  moduleServer(
+    id,
+    function(input, output, session) {
+      df <- reactive({
+        # do something fancy
+      })
+      
+      output$plot1 <- renderPlot({
+        ggplot(df(), aes(x = x, y = y)) +
+          geom_point()
+      })
+    }
+  )
+}
+```
+
+:::
+
+::: {.column width="25%"}
+
+Minimal changes necessary
+
+:::
+
+::::
+
+## Anatomy of a Module (Server) {auto-animate=true}
+
+:::: {.columns}
+
+::: {.column width="70%"}
+
+```{.r code-line-numbers="1,2"}
+artServer <- function(id) {
+  moduleServer(id,
+    function(input, output, session) {
+      df <- reactive({
+        # do something fancy
+      })
+      
+      output$plot1 <- renderPlot({
+        ggplot(df(), aes(x = x, y = y)) +
+          geom_point()
+      })
+    }
+  )
+}
+```
+
+:::
+
+::: {.column width="30%"}
+
+:thinking: `id`
+
+:::
+
+::::
+
+* ``moduleServer()`: Encapsulate server-side logic with namespace applied.
+
+## Invoking Modules
+
+```{.r}
+ui <- fluidPage(
+  fluidRow(
+    artUI("mod1")
+  )
+)
+
+server <- function(input, output, session) {
+  artServer("mod1")
+}
+
+shinyApp(ui, server)
+```
+
+## Giving and Receiving 
+
+:::: {.columns}
+
+::: {.column width="60%"}
+
+```r
+artUI <- function(id, choices = c("jar", "vase")) {
+  ns <- NS(id)
+  tagList(
+    checkboxInput(
+      ns("input1"),
+      "Check Here"
+    ),
+    selectInput(
+      ns("input2"),
+      "Select Object",
+      choices = choices,
+      selected = choices[1],
+      multiple = FALSE
+    ),
+    plotOutput(ns("plot1"))
+  )
+}
+```
+:::
+
+::: {.column width="40%"}
+
+* Reasonable inputs: static values, vectors, flags
+* Avoid **reactive** parameters
+* Return value: `tagList()` of inputs, output placeholders, and other UI elements 
+
+:::
+
+::::
+
+## Giving and Receiving 
+
+```{.r}
+artServer <- function(id, df, title = "My Plot") {
+  moduleServer(id,
+    function(input, output, session) {
+      user_selections <- reactive({
+        list(input1 = input$input1, input2 = input$input2)
+      })
+      
+      output$plot1 <- renderPlot({
+        ggplot(df(), aes(x = x, y = y)) +
+          geom_point() +
+          ggtitle(title)
+      })
+      
+      user_selections
+    }
+  )
+}
+```
+
+* Input parameters (and return values) can be a mix of static and **reactive** objects
+
+## To () or not to () {.smaller}
+
+:::: {.columns}
+
+::: {.column width="40%"}
+
+```{.r}
+# app server
+df <- reactive({
+  art_data |>
+    filter(dept == input$dept)
+})
+
+artServer("mod1", df)
+```
+
+:::
+
+::: {.column width="60%"}
+
+```{.r}
+artServer <- function(id, df, title = "Amazing") {
+  moduleServer(id,
+    function(input, output, session) {
+      user_selections <- reactive({
+        list(input1 = input$input1,
+             input2 = input$input2)
+      })
+      
+      output$plot1 <- renderPlot({
+        ggplot(df(), aes(x = x, y = y)) +
+          geom_point() +
+          ggtitle(title)
+      })
+      
+      user_selections
+    }
+  )
+}
+```
+
+:::
+
+::::
+
+* Reactive parameters reference by **name**: `df`
+* Inside module, **invoke** reactive parameter as you would any other reactive in Shiny: `df()`
+* Any reactive(s) returned by module should also be reference by **name**: `user_selections`,  ~~`user_selections()`~~
+
+
+# `r fontawesome::fa("people-carry", "white")` Code-Along {background-color="#17395c"}
+
+Applying `{golem}` & `{renv}`to our simclindata.shiny application
+
+::: footer
+[engineering-shiny.org](https://engineering-shiny.org/)
+:::
+

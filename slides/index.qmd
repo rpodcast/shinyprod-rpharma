@@ -1,0 +1,29 @@
+---
+title: "Building Production-Quality Shiny Applications"
+author: Eric Nantz
+footer: "[rpharma.shinyprod.com](https://rpharma.shinyprod.com)"
+from: markdown+emoji
+format:
+  revealjs:
+    theme: slides.scss
+    scrollable: true
+    incremental: false
+    slide-number: c/t # c/t | c | h/v | h.v
+    slide-tone: false #true
+    code-line-numbers: false
+    history: false
+execute:
+  echo: false
+  freeze: auto
+cache: false
+---
+
+{{< include 00-setup.qmd >}}
+
+{{< include 01-dev-practices.qmd >}}
+
+{{< include 02-databases.qmd >}}
+
+{{< include 03-design-ux.qmd >}}
+
+{{< include 04-conclusion.qmd >}}

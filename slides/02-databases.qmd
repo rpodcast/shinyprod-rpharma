@@ -1,0 +1,226 @@
+# Databases and Shiny
+
+
+```{r}
+#| label: add-object
+#| echo: false
+library(dplyr)
+load("db/sim_patients.rda")
+#sample_data <- readRDS("db/sample_data.rds")
+```
+
+---
+
+:::: {.columns}
+
+### SQL Jedi
+
+::: {.column width="50%"}
+
+![](assets/img/c3po.png){width="45%"}
+
+:::
+
+::: {.column width="50%}
+
+### `{dplyr}` Jedi 
+
+![](assets/img/r2-d2.png){width="70%"}
+
+:::
+
+::::
+
+## Interface to Databases: `{DBI}`
+
+Unified set of methods & classes bridging interfacing R to database management systems (DBMS)
+
+* Connect and disconnect from DB
+* Execute queries
+* Extract results
+* Obtain metadata when available
+* Each DBMS supported by a dedicated package
+
+## All About Connections
+
+You have used connections in R (and may not realize it)
+
+```r
+read.csv("path/to/file.csv", stringsAsFactors = FALSE)
+
+readr::read_csv("path/to/file.csv")
+
+openxlsx::write.xlsx(df, file = "/path/to/file.xlsx")
+```
+
+. . .
+
+<br>
+
+> Behind the scenes: connections are dynamically created (and terminated) during file input/output.
+
+## Database Options
+
+::: {.nonincremental}
+* Relational databases come in many flavors
+:::
+
+:::: {.columns}
+
+::: {.column}
+
+### [SQLite](https://www.sqlite.org/index.html)
+
+<br>
+
+`r fontawesome::fa("file")` Written to file
+
+`r fontawesome::fa("door-open")` Open access
+
+`r fontawesome::fa("r-project")` [`{RSQLite}`](https://rsqlite.r-dbi.org/)
+
+Ideal for prototyping DB solutions
+
+:::
+
+::: {.column}
+
+### [PostGreSQL](https://www.postgresql.org/)
+
+<br>
+
+`r fontawesome::fa("database")` Hosted on server
+
+`r fontawesome::fa("lock")` Access via authentication
+
+`r fontawesome::fa("r-project")` [`{RPostgres}`](https://rpostgres.r-dbi.org/)
+
+Ideal for production-grade DB workflows
+
+:::
+
+::::
+
+
+## Defining Connection
+
+```{r}
+#| label: connection-example
+#| echo: true
+library(DBI)
+library(RSQLite)
+
+# initialize connection object
+con <- dbConnect(
+  drv = RSQLite::SQLite(),
+  dbname = ":memory:"
+)
+
+# send data frame to a table
+dbWriteTable(con, "sim_patients", sim_patients)
+
+# disconnect when done
+#dbDisconnect(con)
+```
+
+## Applying your `{dplyr}` Skillz
+
+`{dbplyr}` provides automatic translation from dplyr syntax to SQL statements
+
+* Integrates with connection objects created by `{DBI}`
+* Calls are evaluated **lazily**: Only when you request results
+* Common dplyr verbs supported out of the box
+
+## Applying your `{dplyr}` Skillz
+
+```{r}
+#| label: dbplyr-demo
+#| echo: true
+library(dplyr)
+
+sim_patients_db <- tbl(con, "sim_patients")
+
+sim_patients_db %>%
+  group_by(ethnicity) %>%
+  count()
+```
+
+## Connections in Shiny
+
+:::: {.columns}
+
+::: {.column width="40%"}
+
+![](assets/img/one_user.png)
+:::
+
+::: {.column width="60%"}
+
+Logical ways to manage connections when developing solo
+
+:::
+
+::::
+
+## Connections in Shiny
+
+:::: {.columns}
+
+::: {.column width="70%"}
+
+![](assets/img/computer_party.jpg)
+:::
+
+::: {.column width="30%"}
+
+::: {.nonincremental}
+* Many users creating connections
+* Potential for degraded performance in your app
+:::
+:::
+
+::::
+
+## Enter the [`{pool}`](https://github.com/rstudio/pool)!
+
+> Abstraction layer on top of database connection objects
+
+* Holds a group of connections to database 
+* Knows to expand or reduce connections as needed
+
+## Let's Dive In
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```r
+con <- dbConnect(
+  drv = RSQLite::SQLite(),
+  dbname = ":memory:"
+)
+```
+
+:::
+
+::: {.column width="50%"}
+
+```r
+pool <- dbPool(
+  drv = RSQLite::SQLite(),
+  dbname = ":memory:"
+)
+```
+:::
+
+::::
+
+::: {.nonincremental}
+* **pool** object a drop-in replacement for **con**
+* Each query goes to the pool first, then fetches or initializes a connection
+* Not necessary to create connections yourself 
+:::
+
+# `r fontawesome::fa("people-carry", "white")` Code-Along {background-color="#17395c"}
+
+Optimize backend calculations in `{simclindata.shiny}` with SQLite database

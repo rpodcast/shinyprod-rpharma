@@ -40,6 +40,8 @@ RUN echo "RENV_PATHS_CACHE=/renv/cache" >> /usr/local/lib/R/etc/Renviron
 # [Optional] Uncomment this section to install additional R packages.
 RUN install2.r --error --skipinstalled --ncpus -1 renv remotes
 
+RUN install2.r --error --skipinstalled --ncpus -4 fontawesome countdown shiny DBI RSQLite dplyr dbplyr rmarkdown knitr
+
 EXPOSE 8787
 
 CMD ["/init"]

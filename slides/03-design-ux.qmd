@@ -1,0 +1,206 @@
+# Design & User Experience {background-image="assets/img/city.jpg" background-size="cover" background-color="black"}
+
+---
+
+:::: {.columns .v-center-container}
+
+::: {.column width="50%"}
+
+![](assets/img/sink_plugs.jpeg){width="100%"}
+
+:::
+
+::: {.column width="50%"}
+
+![](assets/img/sign-east-east.png){width="90%"}
+
+:::
+
+::::
+
+## But ... I'm not a Web Designer?
+
+::: {.nonincremental}
+* Wealth of packages available in the Shiny ecosystem
+* Plug-in favorite theme styles
+* Ability to go as low-level as desired with CSS and JavaScript
+:::
+
+### 💡 It's not all about you! (That's good)
+
+# Language of the Web
+
+---
+
+### Shiny
+
+```r
+dept_choices <- c("Ancient Near Easter Art", "American")
+selectInput(
+  "dept",
+  "Select Department",
+  choices = dept_choices
+)
+```
+
+### HTML
+
+```html
+<div class="form-group shiny-input-container">
+  <label class="control-label" id="dept-label" for="dept">
+    Select Department
+  </label>
+  <div>
+    <select id="dept" class="form-control">
+      <option value="Ancient Near Easter Art" selected>Ancient Near Easter Art</option>
+      <option value="American">American</option>
+    </select>
+  </div>
+</div>
+
+```
+
+## Multiple Levels of Abstraction
+
+<br>
+
+:::: {.columns}
+
+::: {.column width="26%"}
+
+`{shiny}`
+
+````r
+fluidRow()
+````
+
+:::
+
+::: {.column width="35%"}
+
+`{htmltools}`
+
+```r
+div(class="row", ...)
+```
+
+:::
+
+::: {.column width="36%"}
+
+Raw HTML
+
+```html
+<div class="row">...</div>
+```
+
+:::
+
+::::
+
+<br>
+
+Empowers users across spectrum of design experience
+
+## Cascading Style Sheets (CSS)
+
+Set of **rules** that define how HTML content is **presented** in the browser
+
+<br>
+
+```html
+selector {
+  property1: value;
+  property2: value;
+}
+```
+
+<br>
+
+* **selector** defines which elements on page to apply rule
+* **property list** set properties of elements to specific values
+
+## Customizing CSS in Shiny (1)
+
+:::: {.columns}
+
+::: {.column width="55%"}
+
+```r
+ui <- fluidPage(
+  tags$head(
+    tags$style(
+      HTML("
+      body {
+        background-color: blue;
+        color: white;
+      }")
+    )
+  ),
+  # application UI
+  ...
+)
+```
+
+:::
+
+::: {.column width="45%"}
+
+* `tags` originates from `{htmltools}`, but imported with `{shiny}`
+
+:::
+
+::::
+
+## Customizing CSS in Shiny (2)
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```r
+# app.R
+
+ui <- fluidPage(
+  tags$head(
+    tags$link(
+      rel = "stylesheet", 
+      type = "text/css", 
+      href = "custom.css"
+    )
+  )
+)
+```
+
+:::
+
+::: {.column width="50%"}
+
+```html
+/* www/custom.css */
+
+body {
+  background-color: blue;
+  color: white;
+}
+```
+
+:::
+
+::::
+
+## Customizing CSS in Shiny (3)
+
+```r
+ui <- fluidPage(
+  h2(
+  "Art Viewer Application", 
+  style = "font-family: monospace;"
+  ),
+  ...
+)
+```
+
+# `r fontawesome::fa("people-carry", "white")` Code-Along {background-color="#17395c"}
+
+Streamline the design of `{simclindata.shiny}` with a pinch of customization

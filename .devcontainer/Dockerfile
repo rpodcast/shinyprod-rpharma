@@ -51,6 +51,10 @@ RUN echo "RENV_PATHS_CACHE=/renv/cache" >> /usr/local/lib/R/etc/Renviron
 # [Optional] Uncomment this section to add Quarto to the container
 RUN /rocker_scripts/install_quarto.sh
 
+# install R packages needed for VSCode interaction and package management
+RUN install2.r --error --skipinstalled --ncpus -4 fontawesome countdown shiny DBI RSQLite dplyr dbplyr rmarkdown knitr
+
+
 # [Optional] Uncomment this section to add Hugo to the container
 # Customize version number as appropriate
 #RUN curl -L https://github.com/gohugoio/hugo/releases/download/v0.87.0/hugo_extended_0.87.0_Linux-64bit.deb -o /tmp/hugo.deb

@@ -1,0 +1,130 @@
+```{r}
+#| echo: false
+#| cache: false
+
+# fill for font awesome icons
+fa_fill <- "#606060"
+```
+
+## Meet the Team! {.smaller}
+
+::: columns
+::: {.column width="50%"}
+**Eric Nantz**
+
+![](assets/img/people/rpodcast-hexagon.png){fig-alt="Eric Nantz" width="30%"}
+
+`r fontawesome::fa("microphone", fill = fa_fill)` [r-podcast.org](https://r-podcast.org)
+
+`r fontawesome::fa("microphone", fill = fa_fill)` [rweekly.fireside.fm](https://rweekly.fireside.fm/)
+
+`r fontawesome::fa("video", fill = fa_fill)` [shinydevseries.com](https://shinydevseries.com)
+
+`r fontawesome::fa("newspaper", fill = fa_fill)` [rweekly.org](https://rweekly.org)
+
+`r fontawesome::fa("twitter", fill = fa_fill)` [@theRcast](https://twitter.com/theRcast/)
+
+`r fontawesome::fa("mastodon", fill = fa_fill)` [@rpodcast@podcastindex.social](https://podcastindex.social/rpodcast)
+
+`r fontawesome::fa("linkedin", fill = fa_fill)` [linkedin.com/in/eric-nantz-6621617](https://www.linkedin.com/in/eric-nantz-6621617/)
+:::
+
+::: {.column width="50%"}
+
+**Michael Thomas**
+
+![](assets/img/people/mthomas.jpg){fig-alt="Mike Thomas" width="30%"}
+
+`r fontawesome::fa("chart-simple", fill = fa_fill)` [ketchbrookanalytics.com](https://www.ketchbrookanalytics.com/)
+
+`r fontawesome::fa("microphone", fill = fa_fill)` [rweekly.fireside.fm](https://rweekly.fireside.fm/)
+
+`r fontawesome::fa("twitter", fill = fa_fill)` [@mike_ketchbrook](https://twitter.com/mike_ketchbrook/)
+
+`r fontawesome::fa("linkedin", fill = fa_fill)` [linkedin.com/in/michaeljthomas2](https://www.linkedin.com/in/michaeljthomas2/)
+:::
+:::
+
+::: footer
+[rpharma.shinyprod.com/#meet-the-workshop-team](https://rpharma.shinyprod.com/#meet-the-workshop-team)
+:::
+
+## Power-On (Setup)
+
+Follow [Setup Procedure](../setup.qmd) to connect with the workshop resources:
+
+* RStudio Connect
+* RStudio Cloud
+* Account Integrations
+
+# The Beginning ... {background-color="black" background-image="assets/img/bg/beginning.png" background-size="cover"}
+
+::: {.notes}
+* You've seen Shiny could be a game-changer for a project
+* Build an application quickly, purely with R code
+* You send it to a key stakeholder, and they love it
+:::
+
+# A New World {background-image="assets/img/bg/metroid_ship.jpg" background-size="cover" background-color="black"}
+
+::: {.notes}
+* Everyone who sees it thinks the app is amazing
+* Suddenly you are asked (or told) this needs to get into PRODUCTION
+* ..... and now what?
+:::
+
+
+## Many Users {background-image="assets/img/bg/many_users.jpg" background-size="contain" background-color="black"}
+
+## High-Profile Situations {background-image="assets/img/bg/nasa_mission_control.jpg" background-size="contain" background-color="black"}
+
+## Part of a Critical Pipeline {background-image="assets/img/bg/pinky_brain_take_over_world.jpg" background-size="contain" background-color="black"}
+
+## The Journey Ahead
+
+<br> 
+
+**Production** has more than one meaning for Shiny apps
+
+. . .
+
+<br>
+
+The tooling & principles discussed in this workshop will guide you to the destination
+
+## Synthetic COVID-19 Data
+
+::: columns
+::: {.column width="50%"}
+
+::: {.nonincremental}
+
+* Over 124,000 synthetic patients generated using open-source [Synthea](https://synthetichealth.github.io/synthea/#home) Tool
+* Longitudinal records of simulated COVID-19 progression leveraging resources & publications known in early 2020
+
+:::
+:::
+
+::: {.column width="50%"}
+
+![](assets/img/other/synthea_example_plots.jpg)
+
+:::
+:::
+
+# (Data) Disclaimer ...
+
+# {background-color="black" background-image="https://memecreator.org/static/images/memes/5381515.jpg" background-size="contain"}
+
+## Our Requirements
+
+We will build a Shiny application `simclindata.shiny` in the spirit of many Life Sciences projects:
+
+* __Integration__ of multiple (large) data sets for analyses and visualization
+* __Interactive__ explorations linking multiple displays
+* __Clean & Logical__ user interface and overall user experience
+* __Maintainable__ code organization and dependencies
+
+
+
+
