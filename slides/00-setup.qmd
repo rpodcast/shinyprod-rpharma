@@ -51,11 +51,8 @@ fa_fill <- "#606060"
 
 ## Power-On (Setup)
 
-Follow [Setup Procedure](../setup.qmd) to connect with the workshop resources:
+Follow [Setup Procedure](../index.qmd) to connect with the workshop RStudio Cloud project and local environment setup
 
-* RStudio Connect
-* RStudio Cloud
-* Account Integrations
 
 # The Beginning ... {background-color="black" background-image="assets/img/bg/beginning.png" background-size="cover"}
 

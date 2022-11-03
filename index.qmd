@@ -22,7 +22,7 @@ Shiny empowers R users to create innovative web applications, without requiring 
 
 ## Setup & Configuration
 
-Please view the information in the callouts below for step-by-step instructions on configuring your accounts and environments. While RStudio Cloud is the preferred development environment, you may utilize your local installation of R and RStudio if you prefer.
+Please view the information in the callouts below for step-by-step instructions on configuring your environments. While RStudio Cloud is the preferred development environment, you may utilize your local installation of R and RStudio if you prefer.
 
 :::{.callout-tip collapse="false"}
 
@@ -44,6 +44,17 @@ If you prefer to use a local installation of R and RStudio, ensure you setup mee
 * Latest released version of RStudio, [`v2022.07.0-548` or later](https://www.rstudio.com/products/rstudio/download/#download)
 * The [`{renv}`](https://rstudio.github.io/renv/articles/renv.html) package. 
 * Clone the Shiny application repository used in the workshop: https://github.com/rpodcast/simclindata.shiny 
+
+:::
+
+The example Shiny application used in the workshop utilizes SQLite databases. While a smaller (prototype) version of the database is included in the [application repository](application repository), the database file containing the entire set of records must be downloaded separately using the following instructions:
+
+:::{.callout-caution collapse="false"}
+
+## Supplemental Database Download
+
+1. Open the `{simclindata.shiny}` application project in your local RStudio session
+1. Download the `synthea_covid19.sqlite` file using [this link](https://shinyprod-rpharma2022.us-east-1.linodeobjects.com/synthea_covid19.sqlite) and save it to the `data-raw` directory of the project.
 
 :::
  
