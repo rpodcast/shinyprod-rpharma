@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Building Production-Quality Shiny Applications – dev-practices</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">(Untitled)</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Building Production-Quality Shiny Applications</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/rpodcast/shinyprod-rpharma" title="GitHub" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">Home</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../slidespage.html" class="sidebar-item-text sidebar-link">Slides</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../license.html" class="sidebar-item-text sidebar-link">License</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#development-best-practices" id="toc-development-best-practices" class="nav-link active" data-scroll-target="#development-best-practices">Development Best Practices</a>
+  <ul class="collapse">
+  <li><a href="#all-about-perspective" id="toc-all-about-perspective" class="nav-link" data-scroll-target="#all-about-perspective">All About Perspective</a></li>
+  <li><a href="#shiny-app-development" id="toc-shiny-app-development" class="nav-link" data-scroll-target="#shiny-app-development">Shiny App Development</a></li>
+  <li><a href="#this-could-happen-to-you" id="toc-this-could-happen-to-you" class="nav-link" data-scroll-target="#this-could-happen-to-you">This Could Happen to You</a></li>
+  <li><a href="#thinking-of-you" id="toc-thinking-of-you" class="nav-link" data-scroll-target="#thinking-of-you">Thinking of You</a></li>
+  </ul></li>
+  <li><a href="#application-dependencies" id="toc-application-dependencies" class="nav-link" data-scroll-target="#application-dependencies">Application Dependencies</a>
+  <ul class="collapse">
+  <li><a href="#its-never-just-shiny" id="toc-its-never-just-shiny" class="nav-link" data-scroll-target="#its-never-just-shiny">It’s Never Just Shiny</a></li>
+  <li><a href="#turned-upside-down" id="toc-turned-upside-down" class="nav-link" data-scroll-target="#turned-upside-down">Turned Upside-Down</a></li>
+  <li><a href="#turned-upside-down-1" id="toc-turned-upside-down-1" class="nav-link" data-scroll-target="#turned-upside-down-1">Turned Upside-Down</a></li>
+  <li><a href="#take-control-with-renv" id="toc-take-control-with-renv" class="nav-link" data-scroll-target="#take-control-with-renv">Take Control with <code>{renv}</code></a></li>
+  <li><a href="#under-the-hood" id="toc-under-the-hood" class="nav-link" data-scroll-target="#under-the-hood">Under the Hood</a></li>
+  </ul></li>
+  <li><a href="#application-structure" id="toc-application-structure" class="nav-link" data-scroll-target="#application-structure">Application Structure</a>
+  <ul class="collapse">
+  <li><a href="#enter-the-golem" id="toc-enter-the-golem" class="nav-link" data-scroll-target="#enter-the-golem">Enter the <code>{golem}</code></a></li>
+  <li><a href="#what-are-modules" id="toc-what-are-modules" class="nav-link" data-scroll-target="#what-are-modules">What are Modules?</a>
+  <ul class="collapse">
+  <li><a href="#building-blocks-to-compose-any-shiny-app-out-of-smaller-more-understandable-pieces" id="toc-building-blocks-to-compose-any-shiny-app-out-of-smaller-more-understandable-pieces" class="nav-link" data-scroll-target="#building-blocks-to-compose-any-shiny-app-out-of-smaller-more-understandable-pieces">Building blocks to compose any Shiny app out of smaller, more understandable pieces</a></li>
+  </ul></li>
+  <li><a href="#sound-familiar" id="toc-sound-familiar" class="nav-link" data-scroll-target="#sound-familiar">Sound familiar?</a></li>
+  <li><a href="#anatomy-of-a-function-ui" id="toc-anatomy-of-a-function-ui" class="nav-link" data-scroll-target="#anatomy-of-a-function-ui">Anatomy of a Function (UI)</a></li>
+  <li><a href="#anatomy-of-a-module-ui" id="toc-anatomy-of-a-module-ui" class="nav-link" data-scroll-target="#anatomy-of-a-module-ui">Anatomy of a Module (UI)</a></li>
+  <li><a href="#anatomy-of-a-module-ui-1" id="toc-anatomy-of-a-module-ui-1" class="nav-link" data-scroll-target="#anatomy-of-a-module-ui-1">Anatomy of a Module (UI)</a></li>
+  <li><a href="#anatomy-of-a-module-server" id="toc-anatomy-of-a-module-server" class="nav-link" data-scroll-target="#anatomy-of-a-module-server">Anatomy of a Module (Server)</a></li>
+  <li><a href="#anatomy-of-a-module-server-1" id="toc-anatomy-of-a-module-server-1" class="nav-link" data-scroll-target="#anatomy-of-a-module-server-1">Anatomy of a Module (Server)</a></li>
+  <li><a href="#anatomy-of-a-module-server-2" id="toc-anatomy-of-a-module-server-2" class="nav-link" data-scroll-target="#anatomy-of-a-module-server-2">Anatomy of a Module (Server)</a></li>
+  <li><a href="#invoking-modules" id="toc-invoking-modules" class="nav-link" data-scroll-target="#invoking-modules">Invoking Modules</a></li>
+  <li><a href="#giving-and-receiving" id="toc-giving-and-receiving" class="nav-link" data-scroll-target="#giving-and-receiving">Giving and Receiving</a></li>
+  <li><a href="#giving-and-receiving-1" id="toc-giving-and-receiving-1" class="nav-link" data-scroll-target="#giving-and-receiving-1">Giving and Receiving</a></li>
+  <li><a href="#to-or-not-to" id="toc-to-or-not-to" class="nav-link" data-scroll-target="#to-or-not-to">To () or not to ()</a></li>
+  </ul></li>
+  <li><a href="#code-along" id="toc-code-along" class="nav-link" data-scroll-target="#code-along"><svg aria-hidden="true" role="img" viewbox="0 0 640 512" style="height:1em;width:1.25em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:white;overflow:visible;position:relative;"><path d="M176 48c0 26.5-21.5 48-48 48s-48-21.5-48-48s21.5-48 48-48s48 21.5 48 48zM144 241.7v65.1l51 51c7.1 7.1 11.8 16.2 13.4 26.1l15.2 90.9c2.9 17.4-8.9 33.9-26.3 36.8s-33.9-8.9-36.8-26.3l-14.3-85.9L66.8 320C54.8 308 48 291.7 48 274.7V186.6c0-32.4 26.2-58.6 58.6-58.6c24.1 0 46.5 12 59.9 32l47.4 71.1 10.1 5V160c0-17.7 14.3-32 32-32H384c17.7 0 32 14.3 32 32v76.2l10.1-5L473.5 160c13.3-20 35.8-32 59.9-32c32.4 0 58.6 26.2 58.6 58.6v88.1c0 17-6.7 33.3-18.7 45.3l-79.4 79.4-14.3 85.9c-2.9 17.4-19.4 29.2-36.8 26.3s-29.2-19.4-26.3-36.8l15.2-90.9c1.6-9.9 6.3-19 13.4-26.1l51-51V241.7l-19 28.5c-4.6 7-11 12.6-18.5 16.3l-59.6 29.8c-2.4 1.3-4.9 2.2-7.6 2.8c-2.6 .6-5.3 .9-7.9 .8H256.7c-2.5 .1-5-.2-7.5-.7c-2.9-.6-5.6-1.6-8.1-3l-59.5-29.8c-7.5-3.7-13.8-9.4-18.5-16.3l-19-28.5zM2.3 468.1L50.1 348.6l49.2 49.2-37.6 94c-6.6 16.4-25.2 24.4-41.6 17.8S-4.3 484.5 2.3 468.1zM512 96c-26.5 0-48-21.5-48-48s21.5-48 48-48s48 21.5 48 48s-21.5 48-48 48zm77.9 252.6l47.8 119.5c6.6 16.4-1.4 35-17.8 41.6s-35-1.4-41.6-17.8l-37.6-94 49.2-49.2z"></path></svg> Code-Along</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="development-best-practices" class="level1">
+<h1>Development Best Practices</h1>
+<section id="all-about-perspective" class="level2">
+<h2 class="anchored" data-anchor-id="all-about-perspective">All About Perspective</h2>
+<p><img src="https://d33wubrfki0l68.cloudfront.net/571b056757d68e6df81a3e3853f54d3c76ad6efc/32d37/diagrams/data-science.png" class="img-fluid"></p>
+<p>R is the standard-bearer for data analysis tooling</p>
+</section>
+<section id="shiny-app-development" class="level2">
+<h2 class="anchored" data-anchor-id="shiny-app-development">Shiny App Development</h2>
+<p>Not just providing another interface for data analysis</p>
+<div class="incremental">
+<p>You are engineering an <strong>entire workflow</strong></p>
+</div>
+</section>
+<section id="this-could-happen-to-you" class="level2">
+<h2 class="anchored" data-anchor-id="this-could-happen-to-you">This Could Happen to You</h2>
+<div class="r-stack">
+<p><img src="assets/img/messydesk.svg" class="fragment" width="550"></p>
+<p><img src="assets/img/works_my_machine.jpg" class="fragment" width="500" height="570"></p>
+<p><img src="assets/img/conflicts.jpg" class="fragment" width="600" height="400"></p>
+</div>
+</section>
+<section id="thinking-of-you" class="level2">
+<h2 class="anchored" data-anchor-id="thinking-of-you">Thinking of You</h2>
+<p>These principles can guide (future) you on the right path:</p>
+<ul>
+<li>Deliberate control of app dependencies</li>
+<li>Managing code complexity with native R frameworks</li>
+<li>Creating <strong>modules</strong> for streamlined organization and re-usability</li>
+</ul>
+<p>Others not covered today</p>
+<ul>
+<li>Rapid prototyping in design process</li>
+<li>Defending against regressions with testing</li>
+<li>Version control for collaboration and peace of mind</li>
+</ul>
+</section>
+</section>
+<section id="application-dependencies" class="level1">
+<h1>Application Dependencies</h1>
+<section id="its-never-just-shiny" class="level2">
+<h2 class="anchored" data-anchor-id="its-never-just-shiny">It’s Never Just Shiny</h2>
+<p>… at least for production-quality apps!</p>
+<ul>
+<li>External data sources</li>
+<li>Connections to other execution backends</li>
+<li>Additional R packages!</li>
+</ul>
+</section>
+<section id="turned-upside-down" class="level2">
+<h2 class="anchored" data-anchor-id="turned-upside-down">Turned Upside-Down</h2>
+<p>Imagine your application is working great!</p>
+<p><br></p>
+<div class="incremental">
+<div class="columns v-center-container">
+<div class="column" style="width:50%;">
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">update.packages</span>(<span class="at">ask =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"pkg"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:&quot;50%;">
+<p><img src="https://rfortherestofus.com/wp-content/uploads/2020/09/update-packages-prompt.png" class="img-fluid"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="turned-upside-down-1" class="level2">
+<h2 class="anchored" data-anchor-id="turned-upside-down-1">Turned Upside-Down</h2>
+<div class="columns v-center-container">
+<div class="column" style="width:50%;">
+<p><code>ggplot2</code> version <code>0.9.3</code></p>
+<p><img src="assets/img/computer_user_happy.png" class="img-fluid" style="width:60.0%"></p>
+</div><div class="column" style="width:50%;">
+<p><code>ggplot2</code> version <code>1.0.0</code></p>
+<p><img src="http://i.giphy.com/RhEvCHIeZAZ6E.gif" class="img-fluid"></p>
+</div>
+</div>
+</section>
+<section id="take-control-with-renv" class="level2">
+<h2 class="anchored" data-anchor-id="take-control-with-renv">Take Control with <a href="https://rstudio.github.io/renv/"><code>{renv}</code></a></h2>
+<blockquote class="blockquote">
+<p>Create <strong>r</strong>eproducible <strong>env</strong>ironments for your R projects.</p>
+</blockquote>
+<ul>
+<li>Next generation of <code>{packrat}</code></li>
+<li>Isolated package library from rest of your system</li>
+<li>Transfer projects to different collaborators / platforms</li>
+<li><strong>Reproducible</strong> package installation</li>
+<li>Easily create new projects or convert existing projects with RStudio or built-in functions.</li>
+</ul>
+</section>
+<section id="under-the-hood" class="level2">
+<h2 class="anchored" data-anchor-id="under-the-hood">Under the Hood</h2>
+<p>Upon initializing a project:</p>
+<ol type="1">
+<li>Project-level <code>.Rprofile</code> to activate custom package library on startup</li>
+<li>Lockfile <code>renv.lock</code> to describe state of project library</li>
+<li><code>renv/library</code> to hold private project library</li>
+<li><code>renv/activate.R</code> performs activation</li>
+</ol>
+</section>
+</section>
+<section id="application-structure" class="level1">
+<h1>Application Structure</h1>
+<section id="enter-the-golem" class="level2">
+<h2 class="anchored" data-anchor-id="enter-the-golem">Enter the <a href="https://thinkr-open.github.io/golem/"><code>{golem}</code></a></h2>
+<blockquote class="blockquote">
+<p>Opinionated framework for building production-grade Shiny applications as <strong>R packages</strong></p>
+</blockquote>
+<ul>
+<li>Scripts guide you with first steps akin to <code>{usethis}</code> &amp; <code>{devtools}</code></li>
+<li>Encourages Shiny best practices (especially <strong>modules</strong>)</li>
+<li>Streamlines deployment on multiple platforms</li>
+</ul>
+</section>
+<section id="what-are-modules" class="level2">
+<h2 class="anchored" data-anchor-id="what-are-modules">What are Modules?</h2>
+<div class="incremental">
+<section id="building-blocks-to-compose-any-shiny-app-out-of-smaller-more-understandable-pieces" class="level3">
+<h3 class="anchored" data-anchor-id="building-blocks-to-compose-any-shiny-app-out-of-smaller-more-understandable-pieces">Building blocks to compose any Shiny app out of smaller, more understandable pieces</h3>
+<ul>
+<li>Avoids namespace collisions when using same widget across different areas of your app</li>
+<li>Allow you to encapsulate distinct app interfaces</li>
+<li>Organize code into logical and easy-to-understand components</li>
+<li>Facilitate collaboration</li>
+</ul>
+</section>
+</div>
+</section>
+<section id="sound-familiar" class="level2">
+<h2 class="anchored" data-anchor-id="sound-familiar">Sound familiar?</h2>
+<ul>
+<li>R functions also help avoid collisions in variable names with general R code</li>
+<li>Essential for creating non-trivial and extensive workflows</li>
+</ul>
+</section>
+<section id="anatomy-of-a-function-ui" class="level2" data-auto-animate="true">
+<h2 data-auto-animate="true" class="anchored" data-anchor-id="anatomy-of-a-function-ui">Anatomy of a Function (UI)</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>artUI <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tagList</span>(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">checkboxInput</span>(</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>      <span class="st">"input1"</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Check Here"</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">selectInput</span>(</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>      <span class="st">"input2"</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Select Object"</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">"jar"</span>, <span class="st">"vase"</span>),</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">selected =</span> <span class="st">"jar"</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">multiple =</span> <span class="cn">FALSE</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plotOutput</span>(<span class="st">"plot1"</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:40%;">
+
+</div>
+</div>
+</section>
+<section id="anatomy-of-a-module-ui" class="level2" data-auto-animate="true">
+<h2 data-auto-animate="true" class="anchored" data-anchor-id="anatomy-of-a-module-ui">Anatomy of a Module (UI)</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>artUI <span class="ot">&lt;-</span> <span class="cf">function</span>(id) {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  ns <span class="ot">&lt;-</span> <span class="fu">NS</span>(id)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tagList</span>(</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">checkboxInput</span>(</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ns</span>(<span class="st">"input1"</span>),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Check Here"</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">selectInput</span>(</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ns</span>(<span class="st">"input2"</span>),</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Select Object"</span>,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">"jar"</span>, <span class="st">"vase"</span>),</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">selected =</span> <span class="st">"jar"</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">multiple =</span> <span class="cn">FALSE</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plotOutput</span>(<span class="fu">ns</span>(<span class="st">"plot1"</span>))</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:40%;">
+
+</div>
+</div>
+</section>
+<section id="anatomy-of-a-module-ui-1" class="level2">
+<h2 class="anchored" data-anchor-id="anatomy-of-a-module-ui-1">Anatomy of a Module (UI)</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>artUI <span class="ot">&lt;-</span> <span class="cf">function</span>(id) {</span>
+<span id="cb4-2"><a href="#cb4-2"></a>  ns <span class="ot">&lt;-</span> <span class="fu">NS</span>(id)</span>
+<span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">tagList</span>(</span>
+<span id="cb4-4"><a href="#cb4-4"></a>    <span class="fu">checkboxInput</span>(</span>
+<span id="cb4-5"><a href="#cb4-5"></a>      <span class="fu">ns</span>(<span class="st">"input1"</span>),</span>
+<span id="cb4-6"><a href="#cb4-6"></a>      <span class="st">"Check Here"</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a>    ),</span>
+<span id="cb4-8"><a href="#cb4-8"></a>    <span class="fu">selectInput</span>(</span>
+<span id="cb4-9"><a href="#cb4-9"></a>      <span class="fu">ns</span>(<span class="st">"input2"</span>),</span>
+<span id="cb4-10"><a href="#cb4-10"></a>      <span class="st">"Select Object"</span>,</span>
+<span id="cb4-11"><a href="#cb4-11"></a>      <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">"jar"</span>, <span class="st">"vase"</span>),</span>
+<span id="cb4-12"><a href="#cb4-12"></a>      <span class="at">selected =</span> <span class="st">"jar"</span>,</span>
+<span id="cb4-13"><a href="#cb4-13"></a>      <span class="at">multiple =</span> <span class="cn">FALSE</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a>    )</span>
+<span id="cb4-15"><a href="#cb4-15"></a>  )</span>
+<span id="cb4-16"><a href="#cb4-16"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:40%;">
+<ul>
+<li><code>id</code>: String to use for namespace</li>
+<li><code>ns &lt;- NS(id)</code>: Create proper namespace function</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="anatomy-of-a-module-server" class="level2" data-auto-animate="true">
+<h2 data-auto-animate="true" class="anchored" data-anchor-id="anatomy-of-a-module-server">Anatomy of a Module (Server)</h2>
+<div class="columns">
+<div class="column" style="width:75%;">
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>artServer <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># do something fancy</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>plot1 <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">df</span>(), <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_point</span>()</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:25%;">
+
+</div>
+</div>
+</section>
+<section id="anatomy-of-a-module-server-1" class="level2" data-auto-animate="true">
+<h2 data-auto-animate="true" class="anchored" data-anchor-id="anatomy-of-a-module-server-1">Anatomy of a Module (Server)</h2>
+<div class="columns">
+<div class="column" style="width:75%;">
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>artServer <span class="ot">&lt;-</span> <span class="cf">function</span>(id) {</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">moduleServer</span>(</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    id,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>      df <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        <span class="co"># do something fancy</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>      })</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>      output<span class="sc">$</span>plot1 <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ggplot</span>(<span class="fu">df</span>(), <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>          <span class="fu">geom_point</span>()</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>      })</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:25%;">
+<p>Minimal changes necessary</p>
+</div>
+</div>
+</section>
+<section id="anatomy-of-a-module-server-2" class="level2" data-auto-animate="true">
+<h2 data-auto-animate="true" class="anchored" data-anchor-id="anatomy-of-a-module-server-2">Anatomy of a Module (Server)</h2>
+<div class="columns">
+<div class="column" style="width:70%;">
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>artServer <span class="ot">&lt;-</span> <span class="cf">function</span>(id) {</span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">moduleServer</span>(id,</span>
+<span id="cb7-3"><a href="#cb7-3"></a>    <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb7-4"><a href="#cb7-4"></a>      df <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
+<span id="cb7-5"><a href="#cb7-5"></a>        <span class="co"># do something fancy</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a>      })</span>
+<span id="cb7-7"><a href="#cb7-7"></a>      </span>
+<span id="cb7-8"><a href="#cb7-8"></a>      output<span class="sc">$</span>plot1 <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb7-9"><a href="#cb7-9"></a>        <span class="fu">ggplot</span>(<span class="fu">df</span>(), <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a>          <span class="fu">geom_point</span>()</span>
+<span id="cb7-11"><a href="#cb7-11"></a>      })</span>
+<span id="cb7-12"><a href="#cb7-12"></a>    }</span>
+<span id="cb7-13"><a href="#cb7-13"></a>  )</span>
+<span id="cb7-14"><a href="#cb7-14"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:30%;">
+<p>:thinking: <code>id</code></p>
+</div>
+</div>
+<ul>
+<li>`<code>moduleServer()</code>: Encapsulate server-side logic with namespace applied.</li>
+</ul>
+</section>
+<section id="invoking-modules" class="level2">
+<h2 class="anchored" data-anchor-id="invoking-modules">Invoking Modules</h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fluidRow</span>(</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">artUI</span>(<span class="st">"mod1"</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">artServer</span>(<span class="st">"mod1"</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="giving-and-receiving" class="level2">
+<h2 class="anchored" data-anchor-id="giving-and-receiving">Giving and Receiving</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>artUI <span class="ot">&lt;-</span> <span class="cf">function</span>(id, <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">"jar"</span>, <span class="st">"vase"</span>)) {</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  ns <span class="ot">&lt;-</span> <span class="fu">NS</span>(id)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tagList</span>(</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">checkboxInput</span>(</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ns</span>(<span class="st">"input1"</span>),</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Check Here"</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">selectInput</span>(</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ns</span>(<span class="st">"input2"</span>),</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Select Object"</span>,</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">choices =</span> choices,</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">selected =</span> choices[<span class="dv">1</span>],</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">multiple =</span> <span class="cn">FALSE</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plotOutput</span>(<span class="fu">ns</span>(<span class="st">"plot1"</span>))</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:40%;">
+<ul>
+<li>Reasonable inputs: static values, vectors, flags</li>
+<li>Avoid <strong>reactive</strong> parameters</li>
+<li>Return value: <code>tagList()</code> of inputs, output placeholders, and other UI elements</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="giving-and-receiving-1" class="level2">
+<h2 class="anchored" data-anchor-id="giving-and-receiving-1">Giving and Receiving</h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>artServer <span class="ot">&lt;-</span> <span class="cf">function</span>(id, df, <span class="at">title =</span> <span class="st">"My Plot"</span>) {</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">moduleServer</span>(id,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>      user_selections <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">list</span>(<span class="at">input1 =</span> input<span class="sc">$</span>input1, <span class="at">input2 =</span> input<span class="sc">$</span>input2)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>      })</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>      output<span class="sc">$</span>plot1 <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ggplot</span>(<span class="fu">df</span>(), <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>          <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>          <span class="fu">ggtitle</span>(title)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>      })</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>      user_selections</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Input parameters (and return values) can be a mix of static and <strong>reactive</strong> objects</li>
+</ul>
+</section>
+<section id="to-or-not-to" class="level2 smaller">
+<h2 class="smaller anchored" data-anchor-id="to-or-not-to">To () or not to ()</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># app server</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  art_data <span class="sc">|&gt;</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(dept <span class="sc">==</span> input<span class="sc">$</span>dept)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">artServer</span>(<span class="st">"mod1"</span>, df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:60%;">
+<div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>artServer <span class="ot">&lt;-</span> <span class="cf">function</span>(id, df, <span class="at">title =</span> <span class="st">"Amazing"</span>) {</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">moduleServer</span>(id,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>      user_selections <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">list</span>(<span class="at">input1 =</span> input<span class="sc">$</span>input1,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">input2 =</span> input<span class="sc">$</span>input2)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>      })</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>      output<span class="sc">$</span>plot1 <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ggplot</span>(<span class="fu">df</span>(), <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>          <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>          <span class="fu">ggtitle</span>(title)</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>      })</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>      user_selections</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<ul>
+<li>Reactive parameters reference by <strong>name</strong>: <code>df</code></li>
+<li>Inside module, <strong>invoke</strong> reactive parameter as you would any other reactive in Shiny: <code>df()</code></li>
+<li>Any reactive(s) returned by module should also be reference by <strong>name</strong>: <code>user_selections</code>, <del><code>user_selections()</code></del></li>
+</ul>
+</section>
+</section>
+<section id="code-along" class="level1" data-background-color="#17395c">
+<h1 data-background-color="#17395c"><svg aria-hidden="true" role="img" viewbox="0 0 640 512" style="height:1em;width:1.25em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:white;overflow:visible;position:relative;"><path d="M176 48c0 26.5-21.5 48-48 48s-48-21.5-48-48s21.5-48 48-48s48 21.5 48 48zM144 241.7v65.1l51 51c7.1 7.1 11.8 16.2 13.4 26.1l15.2 90.9c2.9 17.4-8.9 33.9-26.3 36.8s-33.9-8.9-36.8-26.3l-14.3-85.9L66.8 320C54.8 308 48 291.7 48 274.7V186.6c0-32.4 26.2-58.6 58.6-58.6c24.1 0 46.5 12 59.9 32l47.4 71.1 10.1 5V160c0-17.7 14.3-32 32-32H384c17.7 0 32 14.3 32 32v76.2l10.1-5L473.5 160c13.3-20 35.8-32 59.9-32c32.4 0 58.6 26.2 58.6 58.6v88.1c0 17-6.7 33.3-18.7 45.3l-79.4 79.4-14.3 85.9c-2.9 17.4-19.4 29.2-36.8 26.3s-29.2-19.4-26.3-36.8l15.2-90.9c1.6-9.9 6.3-19 13.4-26.1l51-51V241.7l-19 28.5c-4.6 7-11 12.6-18.5 16.3l-59.6 29.8c-2.4 1.3-4.9 2.2-7.6 2.8c-2.6 .6-5.3 .9-7.9 .8H256.7c-2.5 .1-5-.2-7.5-.7c-2.9-.6-5.6-1.6-8.1-3l-59.5-29.8c-7.5-3.7-13.8-9.4-18.5-16.3l-19-28.5zM2.3 468.1L50.1 348.6l49.2 49.2-37.6 94c-6.6 16.4-25.2 24.4-41.6 17.8S-4.3 484.5 2.3 468.1zM512 96c-26.5 0-48-21.5-48-48s21.5-48 48-48s48 21.5 48 48s-21.5 48-48 48zm77.9 252.6l47.8 119.5c6.6 16.4-1.4 35-17.8 41.6s-35-1.4-41.6-17.8l-37.6-94 49.2-49.2z"></path></svg> Code-Along</h1>
+<p>Applying <code>{golem}</code> &amp; <code>{renv}</code>to our simclindata.shiny application</p>
+<div class="footer">
+<p><a href="https://engineering-shiny.org/">engineering-shiny.org</a></p>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

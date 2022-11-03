@@ -1,5 +1,12 @@
 [
   {
+    "objectID": "slidespage.html",
+    "href": "slidespage.html",
+    "title": "Slides",
+    "section": "",
+    "text": "View slides in full screen"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Building Production-Quality Shiny Applications",
@@ -7,25 +14,18 @@
     "text": "🗓️ November 3, 2022 | 9:00am - 12:00pm EDT\n🏨 Virtual\n💥 FREE with conference registration\n📝 To register for the workshop, visit https://rinpharma.com/workshop/2022conference/."
   },
   {
-    "objectID": "index.html#learning-objectives",
-    "href": "index.html#learning-objectives",
+    "objectID": "index.html#setup-configuration",
+    "href": "index.html#setup-configuration",
     "title": "Building Production-Quality Shiny Applications",
-    "section": "Learning objectives",
-    "text": "Learning objectives\nTODO: Add general description of course modules"
+    "section": "Setup & Configuration",
+    "text": "Setup & Configuration\nPlease view the information in the callouts below for step-by-step instructions on configuring your accounts and environments. While RStudio Cloud is the preferred development environment, you may utilize your local installation of R and RStudio if you prefer.\n\n\n\n\n\n\nRStudio Cloud\n\n\n\n\n\n\nJoin the RStudio Cloud Workspace dedicated to this workshop by visiting this customized invitation URL. If you already have an RStudio Cloud account, you are welcome to use it for the workshop. Otherwise, you can create a new account for free.\nYou will see a project called simclindata.shiny. Open that project and create a saved copy. This process could take a couple of minutes depending on server load.\nAfter the project loads, you will see messages in the R console about restoring or repairing the package library. Execute renv::restore(prompt = FALSE) to install packages into the project. This process should complete in one or two minutes.\n\n\n\n\n\n\n\n\n\n\nLocal R & RStudio\n\n\n\n\n\nIf you prefer to use a local installation of R and RStudio, ensure you setup meets the following requirements:\n\nR version 4.1 or later\nLatest released version of RStudio, v2022.07.0-548 or later\nThe {renv} package.\nClone the Shiny application repository used in the workshop: https://github.com/rpodcast/simclindata.shiny"
   },
   {
-    "objectID": "index.html#is-this-course-for-me",
-    "href": "index.html#is-this-course-for-me",
+    "objectID": "CODE_OF_CONDUCT.html",
+    "href": "CODE_OF_CONDUCT.html",
     "title": "Building Production-Quality Shiny Applications",
-    "section": "Is this course for me?",
-    "text": "Is this course for me?\nTODO: Copy most text from existing Shiny prod site"
-  },
-  {
-    "objectID": "index.html#prework",
-    "href": "index.html#prework",
-    "title": "Building Production-Quality Shiny Applications",
-    "section": "Prework",
-    "text": "Prework\nTODO: Copy over setup instructions from existing Shiny prod site"
+    "section": "",
+    "text": "As contributors and maintainers of this project, we pledge to respect all people who contribute through reporting issues, posting feature requests, updating documentation, submitting pull requests or patches, and other activities.\nWe are committed to making participation in this project a harassment-free experience for everyone, regardless of level of experience, gender, gender identity and expression, sexual orientation, disability, personal appearance, body size, race, ethnicity, age, or religion.\nExamples of unacceptable behavior by participants include the use of sexual language or imagery, derogatory comments or personal attacks, trolling, public or private harassment, insults, or other unprofessional conduct.\nProject maintainers have the right and responsibility to remove, edit, or reject comments, commits, code, wiki edits, issues, and other contributions that are not aligned to this Code of Conduct. Project maintainers who do not follow the Code of Conduct may be removed from the project team.\nInstances of abusive, harassing, or otherwise unacceptable behavior may be reported by opening an issue or contacting one or more of the project maintainers.\nThis Code of Conduct is adapted from the Contributor Covenant (http://contributor-covenant.org), version 1.0.0, available at http://contributor-covenant.org/version/1/0/0/"
   },
   {
     "objectID": "license.html",
@@ -35,10 +35,563 @@
     "text": "This work is licensed under a Creative Commons Attribution 4.0 International License."
   },
   {
-    "objectID": "CODE_OF_CONDUCT.html",
-    "href": "CODE_OF_CONDUCT.html",
+    "objectID": "slides/00-setup.html#meet-the-team",
+    "href": "slides/00-setup.html#meet-the-team",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Meet the Team!",
+    "text": "Meet the Team!\n\n\nEric Nantz\n\n r-podcast.org\n rweekly.fireside.fm\n shinydevseries.com\n rweekly.org\n @theRcast\n @rpodcast@podcastindex.social\n linkedin.com/in/eric-nantz-6621617\n\nMichael Thomas\n\n ketchbrookanalytics.com\n rweekly.fireside.fm\n @mike_ketchbrook\n linkedin.com/in/michaeljthomas2\n\n\n\nrpharma.shinyprod.com/#meet-the-workshop-team"
+  },
+  {
+    "objectID": "slides/00-setup.html#power-on-setup",
+    "href": "slides/00-setup.html#power-on-setup",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Power-On (Setup)",
+    "text": "Power-On (Setup)\nFollow Setup Procedure to connect with the workshop resources:\n\nRStudio Connect\nRStudio Cloud\nAccount Integrations"
+  },
+  {
+    "objectID": "slides/00-setup.html#many-users",
+    "href": "slides/00-setup.html#many-users",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Many Users",
+    "text": "Many Users"
+  },
+  {
+    "objectID": "slides/00-setup.html#high-profile-situations",
+    "href": "slides/00-setup.html#high-profile-situations",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "High-Profile Situations",
+    "text": "High-Profile Situations"
+  },
+  {
+    "objectID": "slides/00-setup.html#part-of-a-critical-pipeline",
+    "href": "slides/00-setup.html#part-of-a-critical-pipeline",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Part of a Critical Pipeline",
+    "text": "Part of a Critical Pipeline"
+  },
+  {
+    "objectID": "slides/00-setup.html#the-journey-ahead",
+    "href": "slides/00-setup.html#the-journey-ahead",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "The Journey Ahead",
+    "text": "The Journey Ahead\n\nProduction has more than one meaning for Shiny apps\n\n\nThe tooling & principles discussed in this workshop will guide you to the destination"
+  },
+  {
+    "objectID": "slides/00-setup.html#synthetic-covid-19-data",
+    "href": "slides/00-setup.html#synthetic-covid-19-data",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Synthetic COVID-19 Data",
+    "text": "Synthetic COVID-19 Data\n\n\n\n\nOver 124,000 synthetic patients generated using open-source Synthea Tool\nLongitudinal records of simulated COVID-19 progression leveraging resources & publications known in early 2020"
+  },
+  {
+    "objectID": "slides/00-setup.html#our-requirements",
+    "href": "slides/00-setup.html#our-requirements",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Our Requirements",
+    "text": "Our Requirements\nWe will build a Shiny application simclindata.shiny in the spirit of many Life Sciences projects:\n\nIntegration of multiple (large) data sets for analyses and visualization\nInteractive explorations linking multiple displays\nClean & Logical user interface and overall user experience\nMaintainable code organization and dependencies"
+  },
+  {
+    "objectID": "slides/01-dev-practices.html",
+    "href": "slides/01-dev-practices.html",
     "title": "Building Production-Quality Shiny Applications",
     "section": "",
-    "text": "As contributors and maintainers of this project, we pledge to respect all people who contribute through reporting issues, posting feature requests, updating documentation, submitting pull requests or patches, and other activities.\nWe are committed to making participation in this project a harassment-free experience for everyone, regardless of level of experience, gender, gender identity and expression, sexual orientation, disability, personal appearance, body size, race, ethnicity, age, or religion.\nExamples of unacceptable behavior by participants include the use of sexual language or imagery, derogatory comments or personal attacks, trolling, public or private harassment, insults, or other unprofessional conduct.\nProject maintainers have the right and responsibility to remove, edit, or reject comments, commits, code, wiki edits, issues, and other contributions that are not aligned to this Code of Conduct. Project maintainers who do not follow the Code of Conduct may be removed from the project team.\nInstances of abusive, harassing, or otherwise unacceptable behavior may be reported by opening an issue or contacting one or more of the project maintainers.\nThis Code of Conduct is adapted from the Contributor Covenant (http://contributor-covenant.org), version 1.0.0, available at http://contributor-covenant.org/version/1/0/0/"
+    "text": "R is the standard-bearer for data analysis tooling\n\n\n\nNot just providing another interface for data analysis\n\nYou are engineering an entire workflow\n\n\n\n\n\n\n\n\n\n\n\n\nThese principles can guide (future) you on the right path:\n\nDeliberate control of app dependencies\nManaging code complexity with native R frameworks\nCreating modules for streamlined organization and re-usability\n\nOthers not covered today\n\nRapid prototyping in design process\nDefending against regressions with testing\nVersion control for collaboration and peace of mind"
+  },
+  {
+    "objectID": "slides/01-dev-practices.html#its-never-just-shiny",
+    "href": "slides/01-dev-practices.html#its-never-just-shiny",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "It’s Never Just Shiny",
+    "text": "It’s Never Just Shiny\n… at least for production-quality apps!\n\nExternal data sources\nConnections to other execution backends\nAdditional R packages!"
+  },
+  {
+    "objectID": "slides/01-dev-practices.html#turned-upside-down",
+    "href": "slides/01-dev-practices.html#turned-upside-down",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Turned Upside-Down",
+    "text": "Turned Upside-Down\nImagine your application is working great!\n\n\n\n\nupdate.packages(ask = FALSE)\nremotes::install_github(\"pkg\")"
+  },
+  {
+    "objectID": "slides/01-dev-practices.html#turned-upside-down-1",
+    "href": "slides/01-dev-practices.html#turned-upside-down-1",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Turned Upside-Down",
+    "text": "Turned Upside-Down\n\n\nggplot2 version 0.9.3\n\n\nggplot2 version 1.0.0"
+  },
+  {
+    "objectID": "slides/01-dev-practices.html#take-control-with-renv",
+    "href": "slides/01-dev-practices.html#take-control-with-renv",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Take Control with {renv}",
+    "text": "Take Control with {renv}\n\nCreate reproducible environments for your R projects.\n\n\nNext generation of {packrat}\nIsolated package library from rest of your system\nTransfer projects to different collaborators / platforms\nReproducible package installation\nEasily create new projects or convert existing projects with RStudio or built-in functions."
+  },
+  {
+    "objectID": "slides/01-dev-practices.html#under-the-hood",
+    "href": "slides/01-dev-practices.html#under-the-hood",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Under the Hood",
+    "text": "Under the Hood\nUpon initializing a project:\n\nProject-level .Rprofile to activate custom package library on startup\nLockfile renv.lock to describe state of project library\nrenv/library to hold private project library\nrenv/activate.R performs activation"
+  },
+  {
+    "objectID": "slides/01-dev-practices.html#enter-the-golem",
+    "href": "slides/01-dev-practices.html#enter-the-golem",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Enter the {golem}",
+    "text": "Enter the {golem}\n\nOpinionated framework for building production-grade Shiny applications as R packages\n\n\nScripts guide you with first steps akin to {usethis} & {devtools}\nEncourages Shiny best practices (especially modules)\nStreamlines deployment on multiple platforms"
+  },
+  {
+    "objectID": "slides/01-dev-practices.html#what-are-modules",
+    "href": "slides/01-dev-practices.html#what-are-modules",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "What are Modules?",
+    "text": "What are Modules?\n\n\nBuilding blocks to compose any Shiny app out of smaller, more understandable pieces\n\nAvoids namespace collisions when using same widget across different areas of your app\nAllow you to encapsulate distinct app interfaces\nOrganize code into logical and easy-to-understand components\nFacilitate collaboration"
+  },
+  {
+    "objectID": "slides/01-dev-practices.html#sound-familiar",
+    "href": "slides/01-dev-practices.html#sound-familiar",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Sound familiar?",
+    "text": "Sound familiar?\n\nR functions also help avoid collisions in variable names with general R code\nEssential for creating non-trivial and extensive workflows"
+  },
+  {
+    "objectID": "slides/01-dev-practices.html#anatomy-of-a-function-ui",
+    "href": "slides/01-dev-practices.html#anatomy-of-a-function-ui",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Anatomy of a Function (UI)",
+    "text": "Anatomy of a Function (UI)\n\n\nartUI <- function() {\n  tagList(\n    checkboxInput(\n      \"input1\",\n      \"Check Here\"\n    ),\n    selectInput(\n      \"input2\",\n      \"Select Object\",\n      choices = c(\"jar\", \"vase\"),\n      selected = \"jar\",\n      multiple = FALSE\n    ),\n    plotOutput(\"plot1\")\n  )\n}"
+  },
+  {
+    "objectID": "slides/01-dev-practices.html#anatomy-of-a-module-ui",
+    "href": "slides/01-dev-practices.html#anatomy-of-a-module-ui",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Anatomy of a Module (UI)",
+    "text": "Anatomy of a Module (UI)\n\n\nartUI <- function(id) {\n  ns <- NS(id)\n  tagList(\n    checkboxInput(\n      ns(\"input1\"),\n      \"Check Here\"\n    ),\n    selectInput(\n      ns(\"input2\"),\n      \"Select Object\",\n      choices = c(\"jar\", \"vase\"),\n      selected = \"jar\",\n      multiple = FALSE\n    ),\n    plotOutput(ns(\"plot1\"))\n  )\n}"
+  },
+  {
+    "objectID": "slides/01-dev-practices.html#anatomy-of-a-module-ui-1",
+    "href": "slides/01-dev-practices.html#anatomy-of-a-module-ui-1",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Anatomy of a Module (UI)",
+    "text": "Anatomy of a Module (UI)\n\n\nartUI <- function(id) {\n  ns <- NS(id)\n  tagList(\n    checkboxInput(\n      ns(\"input1\"),\n      \"Check Here\"\n    ),\n    selectInput(\n      ns(\"input2\"),\n      \"Select Object\",\n      choices = c(\"jar\", \"vase\"),\n      selected = \"jar\",\n      multiple = FALSE\n    )\n  )\n}\n\n\nid: String to use for namespace\nns <- NS(id): Create proper namespace function"
+  },
+  {
+    "objectID": "slides/01-dev-practices.html#anatomy-of-a-module-server",
+    "href": "slides/01-dev-practices.html#anatomy-of-a-module-server",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Anatomy of a Module (Server)",
+    "text": "Anatomy of a Module (Server)\n\n\nartServer <- function(input, output, session) {\n  df <- reactive({\n    # do something fancy\n  })\n  \n  output$plot1 <- renderPlot({\n    ggplot(df(), aes(x = x, y = y)) +\n      geom_point()\n  })\n}"
+  },
+  {
+    "objectID": "slides/01-dev-practices.html#anatomy-of-a-module-server-1",
+    "href": "slides/01-dev-practices.html#anatomy-of-a-module-server-1",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Anatomy of a Module (Server)",
+    "text": "Anatomy of a Module (Server)\n\n\nartServer <- function(id) {\n  moduleServer(\n    id,\n    function(input, output, session) {\n      df <- reactive({\n        # do something fancy\n      })\n      \n      output$plot1 <- renderPlot({\n        ggplot(df(), aes(x = x, y = y)) +\n          geom_point()\n      })\n    }\n  )\n}\n\nMinimal changes necessary"
+  },
+  {
+    "objectID": "slides/01-dev-practices.html#anatomy-of-a-module-server-2",
+    "href": "slides/01-dev-practices.html#anatomy-of-a-module-server-2",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Anatomy of a Module (Server)",
+    "text": "Anatomy of a Module (Server)\n\n\nartServer <- function(id) {\n  moduleServer(id,\n    function(input, output, session) {\n      df <- reactive({\n        # do something fancy\n      })\n      \n      output$plot1 <- renderPlot({\n        ggplot(df(), aes(x = x, y = y)) +\n          geom_point()\n      })\n    }\n  )\n}\n\n:thinking: id\n\n\n\n`moduleServer(): Encapsulate server-side logic with namespace applied."
+  },
+  {
+    "objectID": "slides/01-dev-practices.html#invoking-modules",
+    "href": "slides/01-dev-practices.html#invoking-modules",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Invoking Modules",
+    "text": "Invoking Modules\nui <- fluidPage(\n  fluidRow(\n    artUI(\"mod1\")\n  )\n)\n\nserver <- function(input, output, session) {\n  artServer(\"mod1\")\n}\n\nshinyApp(ui, server)"
+  },
+  {
+    "objectID": "slides/01-dev-practices.html#giving-and-receiving",
+    "href": "slides/01-dev-practices.html#giving-and-receiving",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Giving and Receiving",
+    "text": "Giving and Receiving\n\n\nartUI <- function(id, choices = c(\"jar\", \"vase\")) {\n  ns <- NS(id)\n  tagList(\n    checkboxInput(\n      ns(\"input1\"),\n      \"Check Here\"\n    ),\n    selectInput(\n      ns(\"input2\"),\n      \"Select Object\",\n      choices = choices,\n      selected = choices[1],\n      multiple = FALSE\n    ),\n    plotOutput(ns(\"plot1\"))\n  )\n}\n\n\nReasonable inputs: static values, vectors, flags\nAvoid reactive parameters\nReturn value: tagList() of inputs, output placeholders, and other UI elements"
+  },
+  {
+    "objectID": "slides/01-dev-practices.html#giving-and-receiving-1",
+    "href": "slides/01-dev-practices.html#giving-and-receiving-1",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Giving and Receiving",
+    "text": "Giving and Receiving\nartServer <- function(id, df, title = \"My Plot\") {\n  moduleServer(id,\n    function(input, output, session) {\n      user_selections <- reactive({\n        list(input1 = input$input1, input2 = input$input2)\n      })\n      \n      output$plot1 <- renderPlot({\n        ggplot(df(), aes(x = x, y = y)) +\n          geom_point() +\n          ggtitle(title)\n      })\n      \n      user_selections\n    }\n  )\n}\n\nInput parameters (and return values) can be a mix of static and reactive objects"
+  },
+  {
+    "objectID": "slides/01-dev-practices.html#to-or-not-to",
+    "href": "slides/01-dev-practices.html#to-or-not-to",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "To () or not to ()",
+    "text": "To () or not to ()\n\n\n# app server\ndf <- reactive({\n  art_data |>\n    filter(dept == input$dept)\n})\n\nartServer(\"mod1\", df)\n\nartServer <- function(id, df, title = \"Amazing\") {\n  moduleServer(id,\n    function(input, output, session) {\n      user_selections <- reactive({\n        list(input1 = input$input1,\n             input2 = input$input2)\n      })\n      \n      output$plot1 <- renderPlot({\n        ggplot(df(), aes(x = x, y = y)) +\n          geom_point() +\n          ggtitle(title)\n      })\n      \n      user_selections\n    }\n  )\n}\n\n\n\nReactive parameters reference by name: df\nInside module, invoke reactive parameter as you would any other reactive in Shiny: df()\nAny reactive(s) returned by module should also be reference by name: user_selections, user_selections()"
+  },
+  {
+    "objectID": "slides/02-databases.html",
+    "href": "slides/02-databases.html",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "",
+    "text": "Code-Along\nOptimize backend calculations in {simclindata.shiny} with SQLite database"
+  },
+  {
+    "objectID": "slides/index.html#meet-the-team",
+    "href": "slides/index.html#meet-the-team",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Meet the Team!",
+    "text": "Meet the Team!\n\n\nEric Nantz\n\n r-podcast.org\n rweekly.fireside.fm\n shinydevseries.com\n rweekly.org\n @theRcast\n @rpodcast@podcastindex.social\n linkedin.com/in/eric-nantz-6621617\n\nMichael Thomas\n\n ketchbrookanalytics.com\n rweekly.fireside.fm\n @mike_ketchbrook\n linkedin.com/in/michaeljthomas2\n\n\n\nrpharma.shinyprod.com/#meet-the-workshop-team"
+  },
+  {
+    "objectID": "slides/index.html#power-on-setup",
+    "href": "slides/index.html#power-on-setup",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Power-On (Setup)",
+    "text": "Power-On (Setup)\nFollow Setup Procedure to connect with the workshop resources:\n\nRStudio Connect\nRStudio Cloud\nAccount Integrations"
+  },
+  {
+    "objectID": "slides/index.html#many-users",
+    "href": "slides/index.html#many-users",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Many Users",
+    "text": "Many Users"
+  },
+  {
+    "objectID": "slides/index.html#high-profile-situations",
+    "href": "slides/index.html#high-profile-situations",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "High-Profile Situations",
+    "text": "High-Profile Situations"
+  },
+  {
+    "objectID": "slides/index.html#part-of-a-critical-pipeline",
+    "href": "slides/index.html#part-of-a-critical-pipeline",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Part of a Critical Pipeline",
+    "text": "Part of a Critical Pipeline"
+  },
+  {
+    "objectID": "slides/index.html#the-journey-ahead",
+    "href": "slides/index.html#the-journey-ahead",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "The Journey Ahead",
+    "text": "The Journey Ahead\n\nProduction has more than one meaning for Shiny apps\n\n\nThe tooling & principles discussed in this workshop will guide you to the destination"
+  },
+  {
+    "objectID": "slides/index.html#synthetic-covid-19-data",
+    "href": "slides/index.html#synthetic-covid-19-data",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Synthetic COVID-19 Data",
+    "text": "Synthetic COVID-19 Data\n\n\n\n\nOver 124,000 synthetic patients generated using open-source Synthea Tool\nLongitudinal records of simulated COVID-19 progression leveraging resources & publications known in early 2020"
+  },
+  {
+    "objectID": "slides/index.html#our-requirements",
+    "href": "slides/index.html#our-requirements",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Our Requirements",
+    "text": "Our Requirements\nWe will build a Shiny application simclindata.shiny in the spirit of many Life Sciences projects:\n\nIntegration of multiple (large) data sets for analyses and visualization\nInteractive explorations linking multiple displays\nClean & Logical user interface and overall user experience\nMaintainable code organization and dependencies"
+  },
+  {
+    "objectID": "slides/index.html#all-about-perspective",
+    "href": "slides/index.html#all-about-perspective",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "All About Perspective",
+    "text": "All About Perspective\n\nR is the standard-bearer for data analysis tooling"
+  },
+  {
+    "objectID": "slides/index.html#shiny-app-development",
+    "href": "slides/index.html#shiny-app-development",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Shiny App Development",
+    "text": "Shiny App Development\nNot just providing another interface for data analysis\n\nYou are engineering an entire workflow"
+  },
+  {
+    "objectID": "slides/index.html#this-could-happen-to-you",
+    "href": "slides/index.html#this-could-happen-to-you",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "This Could Happen to You",
+    "text": "This Could Happen to You"
+  },
+  {
+    "objectID": "slides/index.html#thinking-of-you",
+    "href": "slides/index.html#thinking-of-you",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Thinking of You",
+    "text": "Thinking of You\nThese principles can guide (future) you on the right path:\n\nDeliberate control of app dependencies\nManaging code complexity with native R frameworks\nCreating modules for streamlined organization and re-usability\n\nOthers not covered today\n\nRapid prototyping in design process\nDefending against regressions with testing\nVersion control for collaboration and peace of mind"
+  },
+  {
+    "objectID": "slides/index.html#its-never-just-shiny",
+    "href": "slides/index.html#its-never-just-shiny",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "It’s Never Just Shiny",
+    "text": "It’s Never Just Shiny\n… at least for production-quality apps!\n\nExternal data sources\nConnections to other execution backends\nAdditional R packages!"
+  },
+  {
+    "objectID": "slides/index.html#turned-upside-down",
+    "href": "slides/index.html#turned-upside-down",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Turned Upside-Down",
+    "text": "Turned Upside-Down\nImagine your application is working great!\n\n\n\n\nupdate.packages(ask = FALSE)\nremotes::install_github(\"pkg\")"
+  },
+  {
+    "objectID": "slides/index.html#turned-upside-down-1",
+    "href": "slides/index.html#turned-upside-down-1",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Turned Upside-Down",
+    "text": "Turned Upside-Down\n\n\nggplot2 version 0.9.3\n\n\nggplot2 version 1.0.0"
+  },
+  {
+    "objectID": "slides/index.html#take-control-with-renv",
+    "href": "slides/index.html#take-control-with-renv",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Take Control with {renv}",
+    "text": "Take Control with {renv}\n\nCreate reproducible environments for your R projects.\n\n\nNext generation of {packrat}\nIsolated package library from rest of your system\nTransfer projects to different collaborators / platforms\nReproducible package installation\nEasily create new projects or convert existing projects with RStudio or built-in functions."
+  },
+  {
+    "objectID": "slides/index.html#under-the-hood",
+    "href": "slides/index.html#under-the-hood",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Under the Hood",
+    "text": "Under the Hood\nUpon initializing a project:\n\nProject-level .Rprofile to activate custom package library on startup\nLockfile renv.lock to describe state of project library\nrenv/library to hold private project library\nrenv/activate.R performs activation"
+  },
+  {
+    "objectID": "slides/index.html#enter-the-golem",
+    "href": "slides/index.html#enter-the-golem",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Enter the {golem}",
+    "text": "Enter the {golem}\n\nOpinionated framework for building production-grade Shiny applications as R packages\n\n\nScripts guide you with first steps akin to {usethis} & {devtools}\nEncourages Shiny best practices (especially modules)\nStreamlines deployment on multiple platforms"
+  },
+  {
+    "objectID": "slides/index.html#what-are-modules",
+    "href": "slides/index.html#what-are-modules",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "What are Modules?",
+    "text": "What are Modules?\n\nBuilding blocks to compose any Shiny app out of smaller, more understandable pieces\n\nAvoids namespace collisions when using same widget across different areas of your app\nAllow you to encapsulate distinct app interfaces\nOrganize code into logical and easy-to-understand components\nFacilitate collaboration"
+  },
+  {
+    "objectID": "slides/index.html#sound-familiar",
+    "href": "slides/index.html#sound-familiar",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Sound familiar?",
+    "text": "Sound familiar?\n\nR functions also help avoid collisions in variable names with general R code\nEssential for creating non-trivial and extensive workflows"
+  },
+  {
+    "objectID": "slides/index.html#anatomy-of-a-function-ui",
+    "href": "slides/index.html#anatomy-of-a-function-ui",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Anatomy of a Function (UI)",
+    "text": "Anatomy of a Function (UI)\n\n\nartUI <- function() {\n  tagList(\n    checkboxInput(\n      \"input1\",\n      \"Check Here\"\n    ),\n    selectInput(\n      \"input2\",\n      \"Select Object\",\n      choices = c(\"jar\", \"vase\"),\n      selected = \"jar\",\n      multiple = FALSE\n    ),\n    plotOutput(\"plot1\")\n  )\n}"
+  },
+  {
+    "objectID": "slides/index.html#anatomy-of-a-module-ui",
+    "href": "slides/index.html#anatomy-of-a-module-ui",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Anatomy of a Module (UI)",
+    "text": "Anatomy of a Module (UI)\n\n\nartUI <- function(id) {\n  ns <- NS(id)\n  tagList(\n    checkboxInput(\n      ns(\"input1\"),\n      \"Check Here\"\n    ),\n    selectInput(\n      ns(\"input2\"),\n      \"Select Object\",\n      choices = c(\"jar\", \"vase\"),\n      selected = \"jar\",\n      multiple = FALSE\n    ),\n    plotOutput(ns(\"plot1\"))\n  )\n}"
+  },
+  {
+    "objectID": "slides/index.html#anatomy-of-a-module-ui-1",
+    "href": "slides/index.html#anatomy-of-a-module-ui-1",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Anatomy of a Module (UI)",
+    "text": "Anatomy of a Module (UI)\n\n\nartUI <- function(id) {\n  ns <- NS(id)\n  tagList(\n    checkboxInput(\n      ns(\"input1\"),\n      \"Check Here\"\n    ),\n    selectInput(\n      ns(\"input2\"),\n      \"Select Object\",\n      choices = c(\"jar\", \"vase\"),\n      selected = \"jar\",\n      multiple = FALSE\n    )\n  )\n}\n\n\nid: String to use for namespace\nns <- NS(id): Create proper namespace function"
+  },
+  {
+    "objectID": "slides/index.html#anatomy-of-a-module-server",
+    "href": "slides/index.html#anatomy-of-a-module-server",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Anatomy of a Module (Server)",
+    "text": "Anatomy of a Module (Server)\n\n\nartServer <- function(input, output, session) {\n  df <- reactive({\n    # do something fancy\n  })\n  \n  output$plot1 <- renderPlot({\n    ggplot(df(), aes(x = x, y = y)) +\n      geom_point()\n  })\n}"
+  },
+  {
+    "objectID": "slides/index.html#anatomy-of-a-module-server-1",
+    "href": "slides/index.html#anatomy-of-a-module-server-1",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Anatomy of a Module (Server)",
+    "text": "Anatomy of a Module (Server)\n\n\nartServer <- function(id) {\n  moduleServer(\n    id,\n    function(input, output, session) {\n      df <- reactive({\n        # do something fancy\n      })\n      \n      output$plot1 <- renderPlot({\n        ggplot(df(), aes(x = x, y = y)) +\n          geom_point()\n      })\n    }\n  )\n}\n\nMinimal changes necessary"
+  },
+  {
+    "objectID": "slides/index.html#anatomy-of-a-module-server-2",
+    "href": "slides/index.html#anatomy-of-a-module-server-2",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Anatomy of a Module (Server)",
+    "text": "Anatomy of a Module (Server)\n\n\nartServer <- function(id) {\n  moduleServer(id,\n    function(input, output, session) {\n      df <- reactive({\n        # do something fancy\n      })\n      \n      output$plot1 <- renderPlot({\n        ggplot(df(), aes(x = x, y = y)) +\n          geom_point()\n      })\n    }\n  )\n}\n\n🤔 id\n\n\n\n`moduleServer(): Encapsulate server-side logic with namespace applied."
+  },
+  {
+    "objectID": "slides/index.html#invoking-modules",
+    "href": "slides/index.html#invoking-modules",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Invoking Modules",
+    "text": "Invoking Modules\nui <- fluidPage(\n  fluidRow(\n    artUI(\"mod1\")\n  )\n)\n\nserver <- function(input, output, session) {\n  artServer(\"mod1\")\n}\n\nshinyApp(ui, server)"
+  },
+  {
+    "objectID": "slides/index.html#giving-and-receiving",
+    "href": "slides/index.html#giving-and-receiving",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Giving and Receiving",
+    "text": "Giving and Receiving\n\n\nartUI <- function(id, choices = c(\"jar\", \"vase\")) {\n  ns <- NS(id)\n  tagList(\n    checkboxInput(\n      ns(\"input1\"),\n      \"Check Here\"\n    ),\n    selectInput(\n      ns(\"input2\"),\n      \"Select Object\",\n      choices = choices,\n      selected = choices[1],\n      multiple = FALSE\n    ),\n    plotOutput(ns(\"plot1\"))\n  )\n}\n\n\nReasonable inputs: static values, vectors, flags\nAvoid reactive parameters\nReturn value: tagList() of inputs, output placeholders, and other UI elements"
+  },
+  {
+    "objectID": "slides/index.html#giving-and-receiving-1",
+    "href": "slides/index.html#giving-and-receiving-1",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Giving and Receiving",
+    "text": "Giving and Receiving\nartServer <- function(id, df, title = \"My Plot\") {\n  moduleServer(id,\n    function(input, output, session) {\n      user_selections <- reactive({\n        list(input1 = input$input1, input2 = input$input2)\n      })\n      \n      output$plot1 <- renderPlot({\n        ggplot(df(), aes(x = x, y = y)) +\n          geom_point() +\n          ggtitle(title)\n      })\n      \n      user_selections\n    }\n  )\n}\n\nInput parameters (and return values) can be a mix of static and reactive objects"
+  },
+  {
+    "objectID": "slides/index.html#to-or-not-to",
+    "href": "slides/index.html#to-or-not-to",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "To () or not to ()",
+    "text": "To () or not to ()\n\n\n# app server\ndf <- reactive({\n  art_data |>\n    filter(dept == input$dept)\n})\n\nartServer(\"mod1\", df)\n\nartServer <- function(id, df, title = \"Amazing\") {\n  moduleServer(id,\n    function(input, output, session) {\n      user_selections <- reactive({\n        list(input1 = input$input1,\n             input2 = input$input2)\n      })\n      \n      output$plot1 <- renderPlot({\n        ggplot(df(), aes(x = x, y = y)) +\n          geom_point() +\n          ggtitle(title)\n      })\n      \n      user_selections\n    }\n  )\n}\n\n\n\nReactive parameters reference by name: df\nInside module, invoke reactive parameter as you would any other reactive in Shiny: df()\nAny reactive(s) returned by module should also be reference by name: user_selections, user_selections()"
+  },
+  {
+    "objectID": "slides/index.html#interface-to-databases-dbi",
+    "href": "slides/index.html#interface-to-databases-dbi",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Interface to Databases: {DBI}",
+    "text": "Interface to Databases: {DBI}\nUnified set of methods & classes bridging interfacing R to database management systems (DBMS)\n\nConnect and disconnect from DB\nExecute queries\nExtract results\nObtain metadata when available\nEach DBMS supported by a dedicated package"
+  },
+  {
+    "objectID": "slides/index.html#all-about-connections",
+    "href": "slides/index.html#all-about-connections",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "All About Connections",
+    "text": "All About Connections\nYou have used connections in R (and may not realize it)\nread.csv(\"path/to/file.csv\", stringsAsFactors = FALSE)\n\nreadr::read_csv(\"path/to/file.csv\")\n\nopenxlsx::write.xlsx(df, file = \"/path/to/file.xlsx\")\n\n\n\nBehind the scenes: connections are dynamically created (and terminated) during file input/output."
+  },
+  {
+    "objectID": "slides/index.html#database-options",
+    "href": "slides/index.html#database-options",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Database Options",
+    "text": "Database Options\n\n\nRelational databases come in many flavors\n\n\n\n\nSQLite\n\n Written to file\n Open access\n {RSQLite}\nIdeal for prototyping DB solutions\n\nPostGreSQL\n\n Hosted on server\n Access via authentication\n {RPostgres}\nIdeal for production-grade DB workflows"
+  },
+  {
+    "objectID": "slides/index.html#defining-connection",
+    "href": "slides/index.html#defining-connection",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Defining Connection",
+    "text": "Defining Connection\n\nlibrary(DBI)\nlibrary(RSQLite)\n\n# initialize connection object\ncon <- dbConnect(\n  drv = RSQLite::SQLite(),\n  dbname = \":memory:\"\n)\n\n# send data frame to a table\ndbWriteTable(con, \"sim_patients\", sim_patients)\n\n# disconnect when done\n#dbDisconnect(con)"
+  },
+  {
+    "objectID": "slides/index.html#applying-your-dplyr-skillz",
+    "href": "slides/index.html#applying-your-dplyr-skillz",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Applying your {dplyr} Skillz",
+    "text": "Applying your {dplyr} Skillz\n{dbplyr} provides automatic translation from dplyr syntax to SQL statements\n\nIntegrates with connection objects created by {DBI}\nCalls are evaluated lazily: Only when you request results\nCommon dplyr verbs supported out of the box"
+  },
+  {
+    "objectID": "slides/index.html#applying-your-dplyr-skillz-1",
+    "href": "slides/index.html#applying-your-dplyr-skillz-1",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Applying your {dplyr} Skillz",
+    "text": "Applying your {dplyr} Skillz\n\nlibrary(dplyr)\n\nsim_patients_db <- tbl(con, \"sim_patients\")\n\nsim_patients_db %>%\n  group_by(ethnicity) %>%\n  count()\n\n# Source:   SQL [2 x 2]\n# Database: sqlite 3.39.4 [:memory:]\n  ethnicity       n\n  <chr>       <int>\n1 hispanic       20\n2 nonhispanic   140"
+  },
+  {
+    "objectID": "slides/index.html#connections-in-shiny",
+    "href": "slides/index.html#connections-in-shiny",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Connections in Shiny",
+    "text": "Connections in Shiny\n\n\n\n\nLogical ways to manage connections when developing solo"
+  },
+  {
+    "objectID": "slides/index.html#connections-in-shiny-1",
+    "href": "slides/index.html#connections-in-shiny-1",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Connections in Shiny",
+    "text": "Connections in Shiny\n\n\n\n\n\n\nMany users creating connections\nPotential for degraded performance in your app"
+  },
+  {
+    "objectID": "slides/index.html#enter-the-pool",
+    "href": "slides/index.html#enter-the-pool",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Enter the {pool}!",
+    "text": "Enter the {pool}!\n\nAbstraction layer on top of database connection objects\n\n\nHolds a group of connections to database\nKnows to expand or reduce connections as needed"
+  },
+  {
+    "objectID": "slides/index.html#lets-dive-in",
+    "href": "slides/index.html#lets-dive-in",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Let’s Dive In",
+    "text": "Let’s Dive In\n\n\ncon <- dbConnect(\n  drv = RSQLite::SQLite(),\n  dbname = \":memory:\"\n)\n\npool <- dbPool(\n  drv = RSQLite::SQLite(),\n  dbname = \":memory:\"\n)\n\n\n\n\npool object a drop-in replacement for con\nEach query goes to the pool first, then fetches or initializes a connection\nNot necessary to create connections yourself"
+  },
+  {
+    "objectID": "slides/index.html#but-im-not-a-web-designer",
+    "href": "slides/index.html#but-im-not-a-web-designer",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "But … I’m not a Web Designer?",
+    "text": "But … I’m not a Web Designer?\n\n\nWealth of packages available in the Shiny ecosystem\nPlug-in favorite theme styles\nAbility to go as low-level as desired with CSS and JavaScript\n\n\n💡 It’s not all about you! (That’s good)"
+  },
+  {
+    "objectID": "slides/index.html#multiple-levels-of-abstraction",
+    "href": "slides/index.html#multiple-levels-of-abstraction",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Multiple Levels of Abstraction",
+    "text": "Multiple Levels of Abstraction\n\n\n\n{shiny}\nfluidRow()\n\n{htmltools}\ndiv(class=\"row\", ...)\n\nRaw HTML\n<div class=\"row\">...</div>\n\n\n\nEmpowers users across spectrum of design experience"
+  },
+  {
+    "objectID": "slides/index.html#cascading-style-sheets-css",
+    "href": "slides/index.html#cascading-style-sheets-css",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Cascading Style Sheets (CSS)",
+    "text": "Cascading Style Sheets (CSS)\nSet of rules that define how HTML content is presented in the browser\n\nselector {\n  property1: value;\n  property2: value;\n}\n\n\nselector defines which elements on page to apply rule\nproperty list set properties of elements to specific values"
+  },
+  {
+    "objectID": "slides/index.html#customizing-css-in-shiny-1",
+    "href": "slides/index.html#customizing-css-in-shiny-1",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Customizing CSS in Shiny (1)",
+    "text": "Customizing CSS in Shiny (1)\n\n\nui <- fluidPage(\n  tags$head(\n    tags$style(\n      HTML(\"\n      body {\n        background-color: blue;\n        color: white;\n      }\")\n    )\n  ),\n  # application UI\n  ...\n)\n\n\ntags originates from {htmltools}, but imported with {shiny}"
+  },
+  {
+    "objectID": "slides/index.html#customizing-css-in-shiny-2",
+    "href": "slides/index.html#customizing-css-in-shiny-2",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Customizing CSS in Shiny (2)",
+    "text": "Customizing CSS in Shiny (2)\n\n\n# app.R\n\nui <- fluidPage(\n  tags$head(\n    tags$link(\n      rel = \"stylesheet\", \n      type = \"text/css\", \n      href = \"custom.css\"\n    )\n  )\n)\n\n/* www/custom.css */\n\nbody {\n  background-color: blue;\n  color: white;\n}"
+  },
+  {
+    "objectID": "slides/index.html#customizing-css-in-shiny-3",
+    "href": "slides/index.html#customizing-css-in-shiny-3",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Customizing CSS in Shiny (3)",
+    "text": "Customizing CSS in Shiny (3)\nui <- fluidPage(\n  h2(\n  \"Art Viewer Application\", \n  style = \"font-family: monospace;\"\n  ),\n  ...\n)"
+  },
+  {
+    "objectID": "slides/03-design-ux.html",
+    "href": "slides/03-design-ux.html",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "",
+    "text": "Wealth of packages available in the Shiny ecosystem\nPlug-in favorite theme styles\nAbility to go as low-level as desired with CSS and JavaScript"
+  },
+  {
+    "objectID": "slides/03-design-ux.html#multiple-levels-of-abstraction",
+    "href": "slides/03-design-ux.html#multiple-levels-of-abstraction",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Multiple Levels of Abstraction",
+    "text": "Multiple Levels of Abstraction\n\n\n\n{shiny}\nfluidRow()\n\n{htmltools}\ndiv(class=\"row\", ...)\n\nRaw HTML\n<div class=\"row\">...</div>\n\n\n\nEmpowers users across spectrum of design experience"
+  },
+  {
+    "objectID": "slides/03-design-ux.html#cascading-style-sheets-css",
+    "href": "slides/03-design-ux.html#cascading-style-sheets-css",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Cascading Style Sheets (CSS)",
+    "text": "Cascading Style Sheets (CSS)\nSet of rules that define how HTML content is presented in the browser\n\nselector {\n  property1: value;\n  property2: value;\n}\n\n\nselector defines which elements on page to apply rule\nproperty list set properties of elements to specific values"
+  },
+  {
+    "objectID": "slides/03-design-ux.html#customizing-css-in-shiny-1",
+    "href": "slides/03-design-ux.html#customizing-css-in-shiny-1",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Customizing CSS in Shiny (1)",
+    "text": "Customizing CSS in Shiny (1)\n\n\nui <- fluidPage(\n  tags$head(\n    tags$style(\n      HTML(\"\n      body {\n        background-color: blue;\n        color: white;\n      }\")\n    )\n  ),\n  # application UI\n  ...\n)\n\n\ntags originates from {htmltools}, but imported with {shiny}"
+  },
+  {
+    "objectID": "slides/03-design-ux.html#customizing-css-in-shiny-2",
+    "href": "slides/03-design-ux.html#customizing-css-in-shiny-2",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Customizing CSS in Shiny (2)",
+    "text": "Customizing CSS in Shiny (2)\n\n\n# app.R\n\nui <- fluidPage(\n  tags$head(\n    tags$link(\n      rel = \"stylesheet\", \n      type = \"text/css\", \n      href = \"custom.css\"\n    )\n  )\n)\n\n/* www/custom.css */\n\nbody {\n  background-color: blue;\n  color: white;\n}"
+  },
+  {
+    "objectID": "slides/03-design-ux.html#customizing-css-in-shiny-3",
+    "href": "slides/03-design-ux.html#customizing-css-in-shiny-3",
+    "title": "Building Production-Quality Shiny Applications",
+    "section": "Customizing CSS in Shiny (3)",
+    "text": "Customizing CSS in Shiny (3)\nui <- fluidPage(\n  h2(\n  \"Art Viewer Application\", \n  style = \"font-family: monospace;\"\n  ),\n  ...\n)"
   }
 ]

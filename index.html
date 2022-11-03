@@ -29,7 +29,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./license.html" rel="next">
+<link href="./slidespage.html" rel="next">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -102,6 +102,11 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./slidespage.html" class="sidebar-item-text sidebar-link">Slides</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./license.html" class="sidebar-item-text sidebar-link">License</a>
   </div>
 </li>
@@ -116,9 +121,7 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a>
   <ul class="collapse">
-  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning objectives</a></li>
-  <li><a href="#is-this-course-for-me" id="toc-is-this-course-for-me" class="nav-link" data-scroll-target="#is-this-course-for-me">Is this course for me?</a></li>
-  <li><a href="#prework" id="toc-prework" class="nav-link" data-scroll-target="#prework">Prework</a></li>
+  <li><a href="#setup-configuration" id="toc-setup-configuration" class="nav-link" data-scroll-target="#setup-configuration">Setup &amp; Configuration</a></li>
   </ul></li>
   <li><a href="#instructor" id="toc-instructor" class="nav-link" data-scroll-target="#instructor">Instructor</a></li>
   </ul>
@@ -153,22 +156,56 @@ ul.task-list li input[type="checkbox"] {
 <section id="overview" class="level1">
 <h1>Overview</h1>
 <p>Shiny empowers R users to create innovative web applications, without requiring substantial expertise in web development frameworks to get up and running. The positive impact of Shiny in data science workflows across academia and a variety of industries such as life sciences is well-known and growing by the year. It is quite common for an early prototype of a Shiny app to generate tremendous excitement for key stakeholders and decision makers, often leading to requests for enhancements and ultimately be included in a production pipeline or process. The road to meeting this goal is challenging, especially for data scientists and statisticians not accustomed to software development! This workshop is for the Shiny developer who has entered this stage of their application development journey. The user is ready to learn how essential workflows, best practices, and the expanding community of Shiny-related packages can help them climb the ladder of Shiny development.</p>
-<section id="learning-objectives" class="level2">
-<h2 class="anchored" data-anchor-id="learning-objectives">Learning objectives</h2>
-<p>TODO: Add general description of course modules</p>
-</section>
-<section id="is-this-course-for-me" class="level2">
-<h2 class="anchored" data-anchor-id="is-this-course-for-me">Is this course for me?</h2>
-<p>TODO: Copy most text from existing Shiny prod site</p>
-</section>
-<section id="prework" class="level2">
-<h2 class="anchored" data-anchor-id="prework">Prework</h2>
-<p>TODO: Copy over setup instructions from existing Shiny prod site</p>
+<section id="setup-configuration" class="level2">
+<h2 class="anchored" data-anchor-id="setup-configuration">Setup &amp; Configuration</h2>
+<p>Please view the information in the callouts below for step-by-step instructions on configuring your accounts and environments. While RStudio Cloud is the preferred development environment, you may utilize your local installation of R and RStudio if you prefer.</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+RStudio Cloud
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Join the RStudio Cloud Workspace dedicated to this workshop by visiting this <a href="https://rstudio.cloud/spaces/299439/join?access_code=N2iOUL1CKXb854Y2UOfUMbjCVqstNeaot2iPvjMz">customized invitation URL</a>. If you already have an RStudio Cloud account, you are welcome to use it for the workshop. Otherwise, you can create a new account for free.</li>
+<li>You will see a project called <em>simclindata.shiny</em>. Open that project and create a saved copy. This process could take a couple of minutes depending on server load.</li>
+<li>After the project loads, you will see messages in the R console about restoring or repairing the package library. Execute <code>renv::restore(prompt = FALSE)</code> to install packages into the project. This process should complete in one or two minutes.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Local R &amp; RStudio
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>If you prefer to use a local installation of R and RStudio, ensure you setup meets the following requirements:</p>
+<ul>
+<li>R version 4.1 or later</li>
+<li>Latest released version of RStudio, <a href="https://www.rstudio.com/products/rstudio/download/#download"><code>v2022.07.0-548</code> or later</a></li>
+<li>The <a href="https://rstudio.github.io/renv/articles/renv.html"><code>{renv}</code></a> package.</li>
+<li>Clone the Shiny application repository used in the workshop: https://github.com/rpodcast/simclindata.shiny</li>
+</ul>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="instructor" class="level1">
 <h1>Instructor</h1>
-<p>TODO: Copy over bio from existing Shiny prod site</p>
+<p><img src="images/rpodcast-hexagon.png" class="img-fluid" style="float:right;padding: 0 0 0 10px;" alt="{{< var people.enantz.name >}}" width="200"> <strong>Eric Nantz</strong> is a director within the statistical innovation center at Eli Lilly and Company, creating analytical pipelines and capabilities of advanced statistical methodologies for clinical design used in multiple phases of development. Outside of his day job, Eric is passionate about connecting with and showcasing the brilliant R community in multiple ways. You may recognize his voice from the <a href="https://r-podcast.org">R-Podcast</a> that he launched in 2012. Eric is also the creator of the <a href="https://shinydevseries.com">Shiny Developer Series</a> where he interviews authors of Shiny-related packages and practitioners developing applications, as well as sharing his own R and Shiny adventures via livestreams on his <a href="https://twitch.tv/rpodcast">Twitch channel</a>. In addition, Eric is a curator for the <a href="https://rweekly.org">RWeekly project</a> and co-host of the <a href="https://rweekly.fireside.fm">RWeekly Highlights podcast</a> which accompanies every issue.</p>
 
 
 </section>
@@ -276,8 +313,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./license.html" class="pagination-link">
-        <span class="nav-page-text">License</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./slidespage.html" class="pagination-link">
+        <span class="nav-page-text">Slides</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

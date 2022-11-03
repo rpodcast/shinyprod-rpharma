@@ -1,15 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://rpharma.shinyprod.com/index.html</loc>
-    <lastmod>2022-10-17T03:03:49.239Z</lastmod>
+    <loc>https://rpharma.shinyprod.com/slidespage.html</loc>
+    <lastmod>2022-11-03T05:46:26.363Z</lastmod>
   </url>
   <url>
-    <loc>https://rpharma.shinyprod.com/license.html</loc>
-    <lastmod>2022-10-17T03:03:50.063Z</lastmod>
+    <loc>https://rpharma.shinyprod.com/index.html</loc>
+    <lastmod>2022-11-03T05:46:27.127Z</lastmod>
   </url>
   <url>
     <loc>https://rpharma.shinyprod.com/CODE_OF_CONDUCT.html</loc>
-    <lastmod>2022-10-17T03:03:50.467Z</lastmod>
+    <lastmod>2022-11-03T05:46:27.527Z</lastmod>
+  </url>
+  <url>
+    <loc>https://rpharma.shinyprod.com/license.html</loc>
+    <lastmod>2022-11-03T05:46:27.867Z</lastmod>
+  </url>
+  <url>
+    <loc>https://rpharma.shinyprod.com/slides/00-setup.html</loc>
+    <lastmod>2022-11-03T05:46:28.299Z</lastmod>
+  </url>
+  <url>
+    <loc>https://rpharma.shinyprod.com/slides/01-dev-practices.html</loc>
+    <lastmod>2022-11-03T05:46:28.967Z</lastmod>
+  </url>
+  <url>
+    <loc>https://rpharma.shinyprod.com/slides/02-databases.html</loc>
+    <lastmod>2022-11-03T05:46:29.543Z</lastmod>
+  </url>
+  <url>
+    <loc>https://rpharma.shinyprod.com/slides/index.html</loc>
+    <lastmod>2022-11-03T05:46:30.463Z</lastmod>
+  </url>
+  <url>
+    <loc>https://rpharma.shinyprod.com/slides/03-design-ux.html</loc>
+    <lastmod>2022-11-03T05:46:31.415Z</lastmod>
+  </url>
+  <url>
+    <loc>https://rpharma.shinyprod.com/slides/04-conclusion.html</loc>
+    <lastmod>2022-11-03T05:46:31.711Z</lastmod>
   </url>
 </urlset>
